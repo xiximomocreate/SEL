@@ -490,7 +490,7 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
     <span class="eyebrow">YouTube</span>
     <h2>嘻嘻獴獴陪你走 YT 頻道</h2>
     <div class="video-box">
-      <iframe src="https://www.youtube-nocookie.com/embed/RXFTZIJeOl4" title="嘻嘻獴獴課程影片" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="youtubePlayer" title="嘻嘻獴獴課程影片" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <p style="margin-top:24px"><a class="btn" data-need="youtube" data-href="youtube" target="_blank" rel="noopener" hidden>前往 YouTube 頻道</a></p>
   </div>
@@ -847,13 +847,33 @@ const SITE_CONFIG = {
   email:     "",   // 收報名信的信箱，例：xixi@example.com
   facebook:  "",
   instagram: "",
-  youtube:   ""
+  youtube:   "https://www.youtube.com/@xiximomo"
 };
 
 (function(){
   const $ = (s, r=document) => r.querySelector(s);
   const $$ = (s, r=document) => [...r.querySelectorAll(s)];
   const C = SITE_CONFIG;
+
+  // 每次載入頁面，從頻道影片清單隨機選擇一支（不自動播放）。
+  const YOUTUBE_VIDEOS = [
+    "Dr845JoLGPg",
+    "nfFvKKAgHGU",
+    "pXlCtowfTOo",
+    "nybAv08Klfc",
+    "7gBQtVrA_90",
+    "4-FxKKbT3Co",
+    "Pi5AiqlrOUE",
+    "dMhPgK9xrZU",
+    "ed9_feGLCqM",
+    "RXFTZIJeOl4",
+    "p9jTRya4704"
+  ];
+  const youtubePlayer = document.getElementById('youtubePlayer');
+  if (youtubePlayer && YOUTUBE_VIDEOS.length) {
+    const videoId = YOUTUBE_VIDEOS[Math.floor(Math.random() * YOUTUBE_VIDEOS.length)];
+    youtubePlayer.src = 'https://www.youtube-nocookie.com/embed/' + videoId;
+  }
 
   // 年份
   $('#yr').textContent = new Date().getFullYear();
