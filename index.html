@@ -878,7 +878,7 @@ const SITE_CONFIG = {
 
   // 日曆資料由課程卡片的 data-dates (YYYY-MM-DD，以逗號分隔) 自動取得。
   const events=new Map();
-  $('.course').forEach((card,i)=>{
+  Array.from(document.querySelectorAll('.course')).forEach((card,i)=>{
     card.id=card.id||'course-'+(i+1);
     (card.dataset.dates||'').split(',').map(d=>d.trim()).filter(Boolean).forEach(d=>{
       if(!events.has(d))events.set(d,[]);
