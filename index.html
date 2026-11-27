@@ -727,11 +727,11 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
     <div>
       <span class="eyebrow">線上報名</span>
       <h2>三步驟，輕鬆報名</h2>
-      <p class="lead">填好資料後，可以用 Email 直接送出，或複製內容傳到 LINE 給老師。老師收到後會與您確認名額與繳費方式。</p>
+      <p class="lead">填好資料後，透過 LINE 開啟嘻嘻獴獴官方帳號聊天室，確認報名內容並按下送出。老師收到後會與您確認名額與繳費方式。</p>
       <ol class="steps">
         <li>選擇想參加的課程</li>
         <li>填寫家長與孩子的基本資料</li>
-        <li>送出後等待老師回覆確認，完成報名 🎉</li>
+        <li>在 LINE 按下送出，等待老師回覆確認 🎉</li>
       </ol>
       <div class="channels" style="margin-top:30px">
         <a class="channel" data-need="formUrl" data-href="formUrl" target="_blank" rel="noopener" hidden>
@@ -770,13 +770,16 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
             <input id="fAge" required placeholder="例：5歲 3個月">
           </label>
         </div>
-        <label>想跟老師說的話 <small>（孩子的個性、有在上早療…，選填）</small>
-          <textarea id="fNote"></textarea>
+        <label>想跟老師說的話 <small>（選填，請勿填寫敏感個資或醫療資訊）</small>
+          <textarea id="fNote" maxlength="500"></textarea>
         </label>
         <div class="form-actions">
           <button type="button" class="btn" id="btnMail">✉️ 用 Email 送出</button>
-          <button type="button" class="btn line" id="btnCopy">💬 複製內容（貼到 LINE）</button>
+          <button type="submit" class="btn line" id="btnLine">💬 透過 LINE 送出報名</button>
+          <button type="button" class="btn ghost" id="btnCopy">複製報名內容</button>
+          <a class="btn ghost" data-need="lineUrl" data-href="lineUrl" target="_blank" rel="noopener noreferrer" hidden>開啟 LINE 官方帳號</a>
         </div>
+        <p style="font-size:13px;color:var(--ink-soft);margin-top:14px">手機可直接帶入報名訊息；電腦若無法帶入，請複製內容後貼到官方帳號聊天室（@495olgvp）。點選送出報名會將表單內容傳至 LINE 的連結，請在 LINE 確認並按下送出。資料僅供課程聯繫與報名使用。</p>
         <p class="toast" id="toast" role="status"></p>
       </form>
     </div>
@@ -843,7 +846,8 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
    ============================================================ */
 const SITE_CONFIG = {
   formUrl:   "",   // Google 表單網址，例：https://forms.gle/xxxxxx
-  lineUrl:   "",   // LINE 官方帳號加好友連結，例：https://lin.ee/xxxxxx
+  lineId:    "@495olgvp",
+  lineUrl:   "https://line.me/R/ti/p/%40495olgvp",   // LINE 官方帳號
   email:     "",   // 收報名信的信箱，例：xixi@example.com
   facebook:  "",
   instagram: "",
@@ -1060,19 +1064,49 @@ const SITE_CONFIG = {
     say('已開啟您的郵件軟體，按下送出就完成囉！');
   });
 
-  $('#btnCopy').addEventListener('click', async () => {
-    const d = collect(); if (!d) return;
-    const text = toText(d);
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch (e) {
-      const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); } catch (_) {}
-      ta.remove();
+  // LINE OA：手機開啟聊天室並帶入文字，桌面提供複製備援。
+  async function copyRegistration(text){
+    try { await navigator.clipboard.writeText(text); return true; }
+    catch (_) {
+      const ta=document.createElement('textarea');ta.value=text;
+      ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      let ok=false;
+      try { ok=document.execCommand('copy'); } catch (_) {}
+      ta.remove();return ok;
     }
-    say(C.lineUrl ? '已複製！請到 LINE 貼上傳給老師。' : '已複製報名內容，可貼到 LINE 或訊息傳給老師。');
-    if (C.lineUrl) setTimeout(() => window.open(C.lineUrl, '_blank', 'noopener'), 700);
+  }
+  function showManualCopy(text){
+    let field=document.getElementById('lineManualCopy');
+    if(!field){field=document.createElement('textarea');field.id='lineManualCopy';field.readOnly=true;field.setAttribute('aria-label','請手動複製報名內容');field.style.width='100%';field.style.marginTop='12px';document.getElementById('toast').after(field);}
+    field.hidden=false;field.value=text;field.focus();field.select();
+  }
+  function validRegistration(){
+    const d=collect();if(!d)return null;
+    if(d.mail&&!document.getElementById('fMail').validity.valid){say('請確認電子郵件格式',false);document.getElementById('fMail').focus();return null;}
+    return d;
+  }
+  document.getElementById('regForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const d=validRegistration();if(!d)return;
+    const text=toText(d);
+    const mobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+    if(mobile){
+      say('即將開啟 LINE，請確認內容並按下送出。');
+      window.location.href='https://line.me/R/oaMessage/'+encodeURIComponent(C.lineId)+'/?'+encodeURIComponent(text);
+    }else{
+      const ok=await copyRegistration(text);
+      if(!ok)showManualCopy(text);
+      say(ok?'已複製報名內容！請點選「開啟 LINE 官方帳號」，再貼上並送出。':'請手動複製下方內容，再開啟 LINE 官方帳號貼上送出。',ok);
+    }
   });
+  document.getElementById('btnCopy').addEventListener('click',async ()=>{
+    const d=validRegistration();if(!d)return;
+    const text=toText(d),ok=await copyRegistration(text);
+    if(!ok)showManualCopy(text);
+    say(ok?'已複製報名內容，請在 LINE 官方帳號聊天室貼上並送出。':'請手動複製下方報名內容。',ok);
+  });
+
 })();
 </script>
 </body>
