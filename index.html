@@ -341,7 +341,7 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 .moment-controls button,.calendar-toolbar button{background:#fff;border:1px solid #E7DACB;border-radius:50%;width:44px;height:44px;font:inherit;font-weight:900;color:var(--ink);cursor:pointer}
 .moment-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 20px;scrollbar-color:var(--coral) transparent}
 .moment-card{flex:0 0 min(310px,82%);scroll-snap-align:start;background:#fff;border:5px solid #fff;border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
-.moment-image{aspect-ratio:4/3;background:var(--sun-l);display:grid;place-items:center;color:var(--ink-soft);position:relative}
+.moment-image{aspect-ratio:1/1;overflow:hidden;background:var(--sun-l);display:grid;place-items:center;color:var(--ink-soft);position:relative}
 .moment-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .moment-card figcaption{padding:12px 16px;font-weight:700}
 .calendar{background:linear-gradient(135deg,#E8F5E9,#FFFAF1)}
@@ -448,6 +448,12 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 #courses .course .actions .btn:not(.line){background:var(--story);color:#49372F}
 @media(max-width:720px){#courses .course-grid{grid-template-columns:1fr;gap:20px}#courses .course-body{padding:18px}#courses .course .course-head{padding:18px 20px}#courses .course h3{font-size:20px}#courses .course dl{font-size:14px;padding:12px}}
 @media(prefers-reduced-motion:reduce){#courses .course{transition:none}#courses .course:hover{transform:none}}
+/* Square moments — gentle staggered photo motion */
+.moment-image img{transform-origin:center;object-position:center}
+.moment-image img.moment-ready{animation:momentBreathe 12s ease-in-out var(--moment-delay,0s) infinite}
+@keyframes momentBreathe{0%,15%,100%{transform:scale(1)}48%,65%{transform:scale(1.055)}}
+.moment-card:hover img,.moment-track:focus-within img{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.moment-image img.moment-ready{animation:none;transform:none}}
 </style>
 </head>
 <body>
@@ -1012,10 +1018,13 @@ const SITE_CONFIG = {
     {src:'https://drive.google.com/thumbnail?id=1FQdfrgn74s8bqTco9du3SU62hi7VP8_R&sz=w1200',url:'https://drive.google.com/file/d/1FQdfrgn74s8bqTco9du3SU62hi7VP8_R/view',caption:'課程花絮 09'}
   ];
   const track = $('#momentTrack');
-  MOMENT_PHOTOS.forEach(item=>{
+  MOMENT_PHOTOS.forEach((item,index)=>{
     const card=document.createElement('figure');card.className='moment-card';
     const frame=document.createElement('div');frame.className='moment-image';frame.textContent='照片載入中';
     const img=document.createElement('img');img.alt=item.caption;img.loading='lazy';img.referrerPolicy='no-referrer';img.onerror=()=>{img.remove();frame.textContent='';const link=document.createElement('a');link.href=item.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='在 Google Drive 查看照片';frame.append(link);};img.src=item.src;
+    img.style.setProperty('--moment-delay', (index % 9 * 1.1) + 's');
+    img.addEventListener('load',()=>img.classList.add('moment-ready'),{once:true});
+    if(img.complete&&img.naturalWidth)img.classList.add('moment-ready');
     frame.append(img);
     const cap=document.createElement('figcaption');cap.textContent=item.caption;card.append(frame,cap);track.append(card);
   });
