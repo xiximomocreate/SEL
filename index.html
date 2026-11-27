@@ -916,18 +916,23 @@ const SITE_CONFIG = {
   }
   buildCourses();
 
-  // 課程花絮：上傳照片至 images/，在這裡新增檔名與說明。
+  // 課程花絮：Google Drive 公開照片連結；新增時在此填入 thumbnail URL 與原始連結。
   const MOMENT_PHOTOS = [
-    {src:'images/moment-01.jpg',caption:'創作的小時光'},
-    {src:'images/moment-02.jpg',caption:'一起探索與遊戲'},
-    {src:'images/moment-03.jpg',caption:'孩子的精彩作品'},
-    {src:'images/moment-04.jpg',caption:'開心的課堂回憶'}
+    {src:'https://drive.google.com/thumbnail?id=1R8BZmFoqIxdWOvm8vt4i2-991H7cA1LV&sz=w1200',url:'https://drive.google.com/file/d/1R8BZmFoqIxdWOvm8vt4i2-991H7cA1LV/view',caption:'課程花絮 01'},
+    {src:'https://drive.google.com/thumbnail?id=1HhNP0_k5bLA91i1Uj451ToOOvqh7GL2w&sz=w1200',url:'https://drive.google.com/file/d/1HhNP0_k5bLA91i1Uj451ToOOvqh7GL2w/view',caption:'課程花絮 02'},
+    {src:'https://drive.google.com/thumbnail?id=1rgBePvdIfGUqzEbkq4e802krbKCSo8jP&sz=w1200',url:'https://drive.google.com/file/d/1rgBePvdIfGUqzEbkq4e802krbKCSo8jP/view',caption:'課程花絮 03'},
+    {src:'https://drive.google.com/thumbnail?id=1jqGIZExBMvHKURie01pTxuzA6B-MYQmr&sz=w1200',url:'https://drive.google.com/file/d/1jqGIZExBMvHKURie01pTxuzA6B-MYQmr/view',caption:'課程花絮 04'},
+    {src:'https://drive.google.com/thumbnail?id=15XlXb3AWN3wh1T9b39tG33fffPvBMbk0&sz=w1200',url:'https://drive.google.com/file/d/15XlXb3AWN3wh1T9b39tG33fffPvBMbk0/view',caption:'課程花絮 05'},
+    {src:'https://drive.google.com/thumbnail?id=1axIcPj0gxmr_9PnAEpF55KCMaJ6cjQeF&sz=w1200',url:'https://drive.google.com/file/d/1axIcPj0gxmr_9PnAEpF55KCMaJ6cjQeF/view',caption:'課程花絮 06'},
+    {src:'https://drive.google.com/thumbnail?id=1IElT1G5SKHv8UScbAS7OVCO_2YC4xVsw&sz=w1200',url:'https://drive.google.com/file/d/1IElT1G5SKHv8UScbAS7OVCO_2YC4xVsw/view',caption:'課程花絮 07'},
+    {src:'https://drive.google.com/thumbnail?id=1vifOuJj4hb4amMblzZ1_ABCQTEoit1Wj&sz=w1200',url:'https://drive.google.com/file/d/1vifOuJj4hb4amMblzZ1_ABCQTEoit1Wj/view',caption:'課程花絮 08'},
+    {src:'https://drive.google.com/thumbnail?id=1FQdfrgn74s8bqTco9du3SU62hi7VP8_R&sz=w1200',url:'https://drive.google.com/file/d/1FQdfrgn74s8bqTco9du3SU62hi7VP8_R/view',caption:'課程花絮 09'}
   ];
   const track = $('#momentTrack');
   MOMENT_PHOTOS.forEach(item=>{
     const card=document.createElement('figure');card.className='moment-card';
-    const frame=document.createElement('div');frame.className='moment-image';frame.textContent='照片準備中';
-    const img=document.createElement('img');img.alt=item.caption;img.loading='lazy';img.onerror=()=>img.remove();img.src=item.src;
+    const frame=document.createElement('div');frame.className='moment-image';frame.textContent='照片載入中';
+    const img=document.createElement('img');img.alt=item.caption;img.loading='lazy';img.referrerPolicy='no-referrer';img.onerror=()=>{img.remove();frame.textContent='';const link=document.createElement('a');link.href=item.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='在 Google Drive 查看照片';frame.append(link);};img.src=item.src;
     frame.append(img);
     const cap=document.createElement('figcaption');cap.textContent=item.caption;card.append(frame,cap);track.append(card);
   });
