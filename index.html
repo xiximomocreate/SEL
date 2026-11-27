@@ -538,6 +538,8 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 .teacher-quote-mark{display:block;font-family:Georgia,serif;font-size:48px;line-height:.8;color:#B79B7B}
 .teacher-belief p{max-width:760px;margin:10px auto 0;color:#705E50;font-weight:700;font-size:clamp(16px,2vw,19px);line-height:1.9}
 @media(max-width:760px){.teacher-book{grid-template-columns:1fr}.teacher-page-left{border-right:0;border-bottom:1px solid #E6D8C7;background:#FFFDFA}.teacher-page-right{background:#FFFDFA}.teacher-page{padding:24px 20px 45px}.teacher-story .teacher-page-left .photo{max-width:300px}.teacher-tape{left:15%;top:20px}.teacher-doodle{width:55px;right:10%;bottom:30px}.teacher-chapter li{font-size:14px}}
+.brand .brand-logo{width:48px;height:48px;flex:0 0 48px;object-fit:contain;display:block;border-radius:0;background:transparent;box-shadow:none}
+@media(max-width:480px){.brand .brand-logo{width:38px;height:38px;flex-basis:38px}}
 </style>
 </head>
 <body>
@@ -561,7 +563,7 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 <header class="nav">
   <div class="wrap">
     <a href="#top" class="brand" aria-label="嘻嘻獴獴 首頁">
-      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#f-happy"/></svg>
+      <img class="brand-logo" src="images/logo.png" alt="" width="48" height="48">
       嘻嘻獴獴大腦小手創作
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">選單</button>
