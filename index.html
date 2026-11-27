@@ -20,7 +20,9 @@
        open = 報名中　soon = 即將開放　full = 額滿（可候補）　closed = 已結束
   3. 報名入口（Google 表單 / LINE / Email / 社群）：
        搜尋「SITE_CONFIG」，把網址填進去；留空 "" 的項目會自動隱藏。
-  4. 照片：把檔案放在 images 資料夾，檔名用 hero.jpg、sel.jpg、art1.jpg、
+  4. 課程日曆：每張課程卡片的 data-dates 填入 YYYY-MM-DD，以逗號分隔。
+  5. 課程花絮：上傳 images/moment-01.jpg 等照片，搜尋 MOMENT_PHOTOS 修改清單。
+  6. 照片：把檔案放在 images 資料夾，檔名用 hero.jpg、sel.jpg、art1.jpg、
        art2.jpg、class.jpg、teacher.jpg；沒放照片時會顯示手繪插畫。
 ================================================================
 -->
@@ -332,6 +334,29 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
   .form-actions .btn{width:100%;justify-content:center}
 }
 
+
+/* 課程花絮與日曆 */
+.moments{background:linear-gradient(135deg,#FFF0E8,#FFFAF1)}
+.moment-controls{display:flex;justify-content:flex-end;gap:10px;margin:20px 0 8px}
+.moment-controls button,.calendar-toolbar button{background:#fff;border:1px solid #E7DACB;border-radius:50%;width:44px;height:44px;font:inherit;font-weight:900;color:var(--ink);cursor:pointer}
+.moment-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 20px;scrollbar-color:var(--coral) transparent}
+.moment-card{flex:0 0 min(310px,82%);scroll-snap-align:start;background:#fff;border:5px solid #fff;border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
+.moment-image{aspect-ratio:4/3;background:var(--sun-l);display:grid;place-items:center;color:var(--ink-soft);position:relative}
+.moment-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.moment-card figcaption{padding:12px 16px;font-weight:700}
+.calendar{background:linear-gradient(135deg,#E8F5E9,#FFFAF1)}
+.calendar-card{max-width:850px;margin:32px auto 0;background:#fff;border-radius:var(--radius);padding:clamp(12px,3vw,30px);box-shadow:var(--shadow)}
+.calendar-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal-week{text-align:center;font-size:14px;color:var(--ink-soft)}
+.cal-day{min-height:56px;border:1px solid #E7DACB;border-radius:10px;background:#FFFAF1;color:var(--ink);font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer}
+.cal-day.has-course{background:var(--sage-l);border-color:var(--sage);font-weight:700}
+.cal-day[aria-pressed="true"]{outline:2px solid var(--coral-d);outline-offset:-2px}
+.cal-dot{font-size:11px;color:#397955}
+.cal-details{margin-top:18px;padding:16px;background:var(--cream);border-radius:16px}
+.cal-details a{display:block;color:var(--coral-d);font-weight:700}
+@media(max-width:1100px){.menu-btn{display:block}.nav ul{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--cream);padding:14px 20px;align-items:stretch;text-align:center}.nav ul.open{display:flex}}
+@media(max-width:480px){.cal-day{min-height:45px;font-size:14px}.cal-dot{font-size:10px}}
 </style>
 </head>
 <body>
@@ -363,6 +388,8 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
       <li><a href="#about">課程理念</a></li>
       <li><a href="#sel">SEL情緒學習</a></li>
       <li><a href="#art">情緒藝術創作</a></li>
+      <li><a href="#moments">課程花絮</a></li>
+      <li><a href="#calendar">課程日曆</a></li>
       <li><a href="#courses">開課資訊</a></li>
       <li><a href="#teacher">關於老師</a></li>
       <li><a href="#signup" class="cta">線上報名</a></li>
@@ -407,6 +434,17 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 </section>
 
 <!-- ======================= 課程理念 ======================= -->
+<section id="youtube" class="video">
+  <div class="wrap center">
+    <span class="eyebrow">YouTube</span>
+    <h2>嘻嘻獴獴陪你走 YT 頻道</h2>
+    <div class="video-box">
+      <iframe src="https://www.youtube-nocookie.com/embed/RXFTZIJeOl4" title="嘻嘻獴獴課程影片" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p style="margin-top:24px"><a class="btn" data-need="youtube" data-href="youtube" target="_blank" rel="noopener" hidden>前往 YouTube 頻道</a></p>
+  </div>
+</section>
+
 <section id="about">
   <div class="wrap">
     <div class="center">
@@ -487,6 +525,25 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 </section>
 
 <!-- ======================= 課程資訊 ======================= -->
+<section id="moments" class="moments">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">課程花絮</span><h2>開心的孩子們</h2><p class="lead">一起收藏探索、遊戲與創作的小小時光。</p></div>
+    <div class="moment-controls"><button type="button" id="photoPrev" aria-label="上一張照片">←</button><button type="button" id="photoNext" aria-label="下一張照片">→</button></div>
+    <div class="moment-track" id="momentTrack" tabindex="0" aria-label="課程照片，可左右滑動"></div>
+  </div>
+</section>
+
+<section id="calendar" class="calendar">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">課程行事曆</span><h2>課程日曆</h2><p class="lead">看看接下來有哪些好玩的課程，點選日期查看資訊。</p></div>
+    <div class="calendar-card">
+      <div class="calendar-toolbar"><button type="button" id="calPrev" aria-label="上個月">←</button><h3 id="calMonth" aria-live="polite"></h3><button type="button" id="calNext" aria-label="下個月">→</button></div>
+      <div class="calendar-grid" id="calGrid"></div>
+      <div id="calDetails" class="cal-details" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
 <section id="courses" class="courses">
   <div class="wrap">
     <div class="center">
@@ -503,7 +560,7 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
            data-form  ：（選填）這門課專屬的 Google 表單網址，沒填就用 SITE_CONFIG 的
            ================================================== -->
 
-      <article class="course" data-status="open" data-theme="sage" data-name="2026 情緒藝術創作">
+      <article class="course" data-status="open" data-theme="sage" data-name="2026 情緒藝術創作" data-dates="2026-12-05,2026-12-12,2026-12-19">
         <div class="course-head">
           <span class="badge">報名中</span>
           <h3>2026 情緒藝術創作</h3>
@@ -522,7 +579,7 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
         </div>
       </article>
       
-      <article class="course" data-status="open" data-theme="sun" data-name="2027 小寶情緒冬令營">
+      <article class="course" data-status="open" data-theme="sun" data-name="2027 小寶情緒冬令營" data-dates="2027-02-01,2027-02-02,2027-02-03">
         <div class="course-head">
           <span class="badge">報名中</span>
           <h3>2027 小寶情緒冬令營</h3>
@@ -541,7 +598,7 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
         </div>
       </article>
 
-      <article class="course" data-status="open" data-theme="sage" data-name="2027 心定力冬令營">
+      <article class="course" data-status="open" data-theme="sage" data-name="2027 心定力冬令營" data-dates="2027-01-25,2027-01-26,2027-01-27,2027-01-28,2027-01-29">
         <div class="course-head">
           <span class="badge">報名中</span>
           <h3>2027 心定力冬令營</h3>
@@ -560,7 +617,7 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
         </div>
       </article>
       
-      <article class="course" data-status="open" data-theme="sun" data-name="寶寶 SEL情緒七感遊戲(體驗班)">
+      <article class="course" data-status="open" data-theme="sun" data-name="寶寶 SEL情緒七感遊戲(體驗班)" data-dates="2027-01-11">
         <div class="course-head">
           <span class="badge">報名中</span>
           <h3>寶寶 SEL情緒七感遊戲(體驗班)</h3>
@@ -704,15 +761,7 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 </section>
 
 <!-- ======================= 影片 ======================= -->
-<section class="video">
-  <div class="wrap center">
-    <span class="eyebrow">課程花絮</span>
-    <h2>看看孩子們怎麼玩</h2>
-    <div class="video-box">
-      <iframe src="https://www.youtube-nocookie.com/embed/RXFTZIJeOl4" title="嘻嘻獴獴課程影片" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
+
 
 </main>
 
@@ -808,6 +857,62 @@ const SITE_CONFIG = {
     });
   }
   buildCourses();
+
+  // 課程花絮：上傳照片至 images/，在這裡新增檔名與說明。
+  const MOMENT_PHOTOS = [
+    {src:'images/moment-01.jpg',caption:'創作的小時光'},
+    {src:'images/moment-02.jpg',caption:'一起探索與遊戲'},
+    {src:'images/moment-03.jpg',caption:'孩子的精彩作品'},
+    {src:'images/moment-04.jpg',caption:'開心的課堂回憶'}
+  ];
+  const track = $('#momentTrack');
+  MOMENT_PHOTOS.forEach(item=>{
+    const card=document.createElement('figure');card.className='moment-card';
+    const frame=document.createElement('div');frame.className='moment-image';frame.textContent='照片準備中';
+    const img=document.createElement('img');img.alt=item.caption;img.loading='lazy';img.onerror=()=>img.remove();img.src=item.src;
+    frame.append(img);
+    const cap=document.createElement('figcaption');cap.textContent=item.caption;card.append(frame,cap);track.append(card);
+  });
+  function slide(dir){const card=track.querySelector('.moment-card');if(card)track.scrollBy({left:dir*(card.offsetWidth+18),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+  $('#photoPrev').onclick=()=>slide(-1);$('#photoNext').onclick=()=>slide(1);
+
+  // 日曆資料由課程卡片的 data-dates (YYYY-MM-DD，以逗號分隔) 自動取得。
+  const events=new Map();
+  $('.course').forEach((card,i)=>{
+    card.id=card.id||'course-'+(i+1);
+    (card.dataset.dates||'').split(',').map(d=>d.trim()).filter(Boolean).forEach(d=>{
+      if(!events.has(d))events.set(d,[]);
+      events.get(d).push(card);
+    });
+  });
+  const now=new Date();let year=now.getFullYear(),month=now.getMonth();
+  const key=(y,m,d)=>y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+  const upcoming=[...events.keys()].sort().find(d=>d>=key(year,month,now.getDate()));
+  if(upcoming){year=Number(upcoming.slice(0,4));month=Number(upcoming.slice(5,7))-1;}
+  function details(date,cards){
+    const box=$('#calDetails');box.replaceChildren();
+    const title=document.createElement('strong');title.textContent=date?date+' 課程':'本月課程';box.append(title);
+    if(!cards.length){const p=document.createElement('p');p.textContent='目前沒有安排課程。';box.append(p);return;}
+    cards.forEach(({date,card})=>{
+      const a=document.createElement('a');a.href='#'+card.id;a.textContent=(date?date+' ｜ ':'')+card.dataset.name+' ｜ '+card.querySelector('.badge').textContent;box.append(a);
+    });
+  }
+  function renderCalendar(){
+    $('#calMonth').textContent=year+' 年 '+(month+1)+' 月';
+    const grid=$('#calGrid');grid.replaceChildren();
+    ['日','一','二','三','四','五','六'].forEach(w=>{const el=document.createElement('span');el.className='cal-week';el.textContent=w;grid.append(el);});
+    for(let i=0;i<new Date(year,month,1).getDay();i++)grid.append(document.createElement('span'));
+    const list=[];
+    for(let d=1;d<=new Date(year,month+1,0).getDate();d++){
+      const date=key(year,month,d),cards=events.get(date)||[];
+      const b=document.createElement('button');b.type='button';b.className='cal-day'+(cards.length?' has-course':'');b.textContent=d;b.setAttribute('aria-label',date+'，'+cards.length+' 堂課');b.setAttribute('aria-pressed','false');
+      if(cards.length){const dot=document.createElement('span');dot.className='cal-dot';dot.textContent=cards.length+' 堂';b.append(dot);cards.forEach(card=>list.push({date,card}));}
+      b.onclick=()=>{grid.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');details(date,cards.map(card=>({card})));};grid.append(b);
+    }
+    details(null,list);
+  }
+  function changeMonth(delta){const next=new Date(year,month+delta,1);year=next.getFullYear();month=next.getMonth();renderCalendar();}
+  $('#calPrev').onclick=()=>changeMonth(-1);$('#calNext').onclick=()=>changeMonth(1);renderCalendar();
 
   // 報名內容整理
   const toast = $('#toast');
