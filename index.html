@@ -357,6 +357,57 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 .cal-details a{display:block;color:var(--coral-d);font-weight:700}
 @media(max-width:1100px){.menu-btn{display:block}.nav ul{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--cream);padding:14px 20px;align-items:stretch;text-align:center}.nav ul.open{display:flex}}
 @media(max-width:480px){.cal-day{min-height:45px;font-size:14px}.cal-dot{font-size:10px}}
+
+/* Storybook Calendar — 繪本手帳 */
+.calendar{background:#F8F2E7;color:#594739}
+.cal-wrap{max-width:780px}
+.cal-intro{position:relative;padding:12px 70px 20px}
+.cal-kicker{display:block;font-size:12px;letter-spacing:.24em;color:#967C65;font-weight:700;margin-bottom:9px}
+.cal-intro h2{display:inline-block;position:relative;z-index:0;margin-bottom:15px}
+.cal-intro h2::after{content:"";position:absolute;left:3%;right:3%;bottom:0;height:7px;background:#E9C58A;border-radius:50%;z-index:-1;transform:rotate(-2deg)}
+.cal-intro .lead{color:#806B59;font-size:15px}
+.cal-cloud,.cal-rainbow{position:absolute;width:88px;top:18px;pointer-events:none}
+.cal-cloud{left:4%;transform:rotate(-8deg)}.cal-rainbow{right:4%}
+.calendar-card{max-width:none;margin:14px auto 0;background:#FFFDFA;border:1px solid #E6D8C7;border-radius:30px;padding:clamp(13px,4vw,36px);box-shadow:0 10px 28px rgba(112,77,49,.06)}
+.calendar-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid #EEE4D8}
+.calendar-toolbar button{background:#F3EBDD;border:0;border-radius:50%;width:44px;height:44px;font-size:30px;line-height:1;color:#806B59;cursor:pointer;transition:background .18s,transform .18s}
+.calendar-toolbar button:hover{background:#EADBC8;transform:scale(1.05)}
+#calMonth{text-align:center;line-height:1.2;color:#594739}
+.cal-year,.cal-en{display:block;font-size:12px;color:#967C65;letter-spacing:.12em;font-weight:500}
+.cal-month-num{display:block;font-size:34px;font-weight:900;margin:4px 0}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.cal-week{text-align:center;font-size:13px;color:#8D7968;padding:4px 0 10px}
+.cal-week.weekend{color:#A66D57}
+.cal-day{min-height:60px;aspect-ratio:1.2;border:2px solid transparent;border-radius:17px;background:transparent;color:#594739;font:inherit;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:0;transition:background .18s,transform .18s}
+.cal-day:hover{background:#F3EBDD;transform:translateY(-1px)}
+.cal-day.has-course{background:var(--cal-color,#EBC1A8);border-color:transparent;color:#594739}
+.cal-day[aria-pressed="true"]{outline:2px solid #A78362;outline-offset:-2px}
+.cal-dot{font-size:13px;line-height:1.1;color:#806044;letter-spacing:2px}
+.cal-day:not(.has-course)::after{content:"";height:14px}
+.cal-legend{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 16px;margin-top:22px}
+.cal-legend span{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#806B59}
+.cal-legend i{width:10px;height:10px;border-radius:50%;background:var(--cal-color);flex:none}
+.cal-details{margin-top:26px;padding:0;background:transparent;border-radius:0;display:grid;gap:12px}
+.cal-detail-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cal-detail-head strong{font-size:17px;color:#594739}
+.cal-reset{border:0;background:transparent;color:#806B59;font:inherit;font-size:13px;text-decoration:underline;cursor:pointer}
+.cal-details a.cal-event{display:flex;align-items:center;gap:14px;padding:14px;background:#FFFDFA;border:1px solid #E6D8C7;border-radius:20px;text-decoration:none;color:#594739;transition:transform .18s}
+.cal-details a.cal-event:hover{transform:translateY(-2px)}
+.cal-event-date{flex:none;min-width:66px;max-width:100px;min-height:66px;border-radius:15px;background:var(--cal-color);color:#594739;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:6px;font-weight:800;line-height:1.3;text-align:center}
+.cal-event-date small{font-weight:500;font-size:11px}.cal-event-date b{font-size:16px;overflow-wrap:anywhere}
+.cal-event-body{flex:1;min-width:0;display:grid;gap:3px}
+.cal-event-body strong{font-size:16px;color:#594739;overflow-wrap:anywhere}
+.cal-event-meta{font-size:12px;color:#806B59;font-weight:400}
+.cal-event-status{font-size:12px;color:#47674A;font-weight:600}
+.cal-event-status::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#A7C4A3;margin-right:6px}
+.cal-event-status[data-status="closed"]::before{background:#aaa}
+.cal-event-status[data-status="full"]::before{background:#DEAE9B}
+.cal-event-status[data-status="soon"]::before{background:#BFDCE5}
+.cal-empty{text-align:center;color:#806B59;background:#FFFDFA;border-radius:20px;padding:22px 10px;font-size:14px}
+.cal-empty span{display:block;color:#C4A06C;font-size:24px}
+.cal-footer{text-align:center;font-style:italic;font-size:12px;color:#967C65;margin-top:20px}
+@media(max-width:480px){.cal-intro{padding-inline:38px}.cal-cloud,.cal-rainbow{width:49px;top:34px}.cal-cloud{left:0}.cal-rainbow{right:0}.calendar-grid{gap:3px}.cal-day{min-height:42px;aspect-ratio:auto;border-radius:12px;font-size:14px}.cal-dot{font-size:11px}.cal-legend{gap:6px 12px}.cal-legend span{font-size:11px}.cal-event-date{min-width:56px;max-width:76px}.cal-event-body strong{font-size:14px}}
+
 </style>
 </head>
 <body>
@@ -534,13 +585,20 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 </section>
 
 <section id="calendar" class="calendar">
-  <div class="wrap">
-    <div class="center"><span class="eyebrow">課程行事曆</span><h2>課程日曆</h2><p class="lead">看看接下來有哪些好玩的課程，點選日期查看資訊。</p></div>
-    <div class="calendar-card">
-      <div class="calendar-toolbar"><button type="button" id="calPrev" aria-label="上個月">←</button><h3 id="calMonth" aria-live="polite"></h3><button type="button" id="calNext" aria-label="下個月">→</button></div>
-      <div class="calendar-grid" id="calGrid"></div>
-      <div id="calDetails" class="cal-details" aria-live="polite"></div>
+  <div class="wrap cal-wrap">
+    <div class="cal-intro center">
+      <svg class="cal-cloud" viewBox="0 0 100 90" aria-hidden="true"><path d="M16 64Q-1 49 16 34Q12 15 34 19Q48 0 63 20Q88 15 86 39Q104 61 82 72H26Q13 72 16 64Z" fill="#E6CDA2"/><circle cx="35" cy="45" r="3" fill="#806449"/><circle cx="62" cy="45" r="3" fill="#806449"/><path d="M43 53Q49 60 55 53" stroke="#806449" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="27" cy="53" rx="6" ry="3" fill="#DA9B82"/><ellipse cx="70" cy="53" rx="6" ry="3" fill="#DA9B82"/></svg>
+      <span class="cal-kicker">LITTLE ADVENTURES</span>
+      <h2>課程日曆</h2><p class="lead">把每一次成長，收藏在日子裡。</p>
+      <svg class="cal-rainbow" viewBox="0 0 100 90" aria-hidden="true"><g transform="rotate(10 50 50)" fill="none" stroke-linecap="round" stroke-width="9"><path d="M12 65A38 38 0 0 1 88 65" stroke="#DEAE9B"/><path d="M25 65A25 25 0 0 1 75 65" stroke="#E9CF91"/><path d="M38 65A12 12 0 0 1 62 65" stroke="#ADC6A6"/></g><path d="M80 8v12m-6-6h12" stroke="#BEA177" stroke-width="2" stroke-linecap="round"/></svg>
     </div>
+    <div class="calendar-card">
+      <div class="calendar-toolbar"><button type="button" id="calPrev" aria-label="上個月">‹</button><h3 id="calMonth" aria-live="polite"></h3><button type="button" id="calNext" aria-label="下個月">›</button></div>
+      <div class="calendar-grid" id="calGrid"></div>
+      <div class="cal-legend" id="calLegend" aria-label="課程色彩標記"></div>
+    </div>
+    <div id="calDetails" class="cal-details" aria-live="polite"></div>
+    <p class="cal-footer">Little steps, big feelings.</p>
   </div>
 </section>
 
@@ -876,43 +934,75 @@ const SITE_CONFIG = {
   function slide(dir){const card=track.querySelector('.moment-card');if(card)track.scrollBy({left:dir*(card.offsetWidth+18),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
   $('#photoPrev').onclick=()=>slide(-1);$('#photoNext').onclick=()=>slide(1);
 
-  // 日曆資料由課程卡片的 data-dates (YYYY-MM-DD，以逗號分隔) 自動取得。
+  // 繪本手帳日曆：從課程卡片讀取日期、名稱、時間、年齡及狀態。
   const events=new Map();
-  Array.from(document.querySelectorAll('.course')).forEach((card,i)=>{
+  const calColors=['#EBC1A8','#E0D1EC','#C7DBC1','#BFDCE5','#E9CF91'];
+  const calCourses=Array.from(document.querySelectorAll('.course[data-dates]'));
+  const colorFor=card=>calColors[calCourses.indexOf(card)%calColors.length];
+  const readField=(card,label)=>{
+    const dt=Array.from(card.querySelectorAll('dt')).find(el=>el.textContent.trim()===label);
+    return dt&&dt.nextElementSibling?dt.nextElementSibling.textContent.trim():'';
+  };
+  const legend=document.getElementById('calLegend');
+  calCourses.forEach((card,i)=>{
     card.id=card.id||'course-'+(i+1);
-    (card.dataset.dates||'').split(',').map(d=>d.trim()).filter(Boolean).forEach(d=>{
+    (card.dataset.dates||'').split(',').map(d=>d.trim()).filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)).forEach(d=>{
       if(!events.has(d))events.set(d,[]);
       events.get(d).push(card);
     });
+    const entry=document.createElement('span'),dot=document.createElement('i');
+    dot.style.setProperty('--cal-color',colorFor(card));
+    entry.append(dot,document.createTextNode(card.dataset.name||card.querySelector('h3').textContent));
+    legend.append(entry);
   });
-  const now=new Date();let year=now.getFullYear(),month=now.getMonth();
+  const now=new Date();let year=now.getFullYear(),month=now.getMonth(),selectedDate=null;
   const key=(y,m,d)=>y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
   const upcoming=[...events.keys()].sort().find(d=>d>=key(year,month,now.getDate()));
   if(upcoming){year=Number(upcoming.slice(0,4));month=Number(upcoming.slice(5,7))-1;}
-  function details(date,cards){
-    const box=$('#calDetails');box.replaceChildren();
-    const title=document.createElement('strong');title.textContent=date?date+' 課程':'本月課程';box.append(title);
-    if(!cards.length){const p=document.createElement('p');p.textContent='目前沒有安排課程。';box.append(p);return;}
-    cards.forEach(({date,card})=>{
-      const a=document.createElement('a');a.href='#'+card.id;a.textContent=(date?date+' ｜ ':'')+card.dataset.name+' ｜ '+card.querySelector('.badge').textContent;box.append(a);
+  const months=['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+  function makeCalEl(tag,cls,txt){const el=document.createElement(tag);if(cls)el.className=cls;if(txt!==undefined)el.textContent=txt;return el;}
+  function details(date,items){
+    const box=document.getElementById('calDetails');box.replaceChildren();
+    const head=makeCalEl('div','cal-detail-head');
+    head.append(makeCalEl('strong','',date?Number(date.slice(5,7))+'/'+Number(date.slice(-2))+' 的小小冒險':'這個月的小小冒險'));
+    if(date){const reset=makeCalEl('button','cal-reset','整月課程');reset.type='button';reset.addEventListener('click',()=>{selectedDate=null;renderCalendar();});head.append(reset);}
+    box.append(head);
+    if(!items.length){const empty=makeCalEl('p','cal-empty');empty.append(makeCalEl('span','','☀'),document.createTextNode(date?'今天留給自由探索的小時光。':'這個月暫時沒有安排課程。'));box.append(empty);return;}
+    const grouped=new Map();
+    items.forEach(item=>{if(!grouped.has(item.card))grouped.set(item.card,[]);grouped.get(item.card).push(Number(item.date.slice(-2)));});
+    grouped.forEach((dates,card)=>{
+      const a=makeCalEl('a','cal-event');a.href='#'+card.id;a.style.setProperty('--cal-color',colorFor(card));
+      const datesSorted=[...new Set(dates)].sort((a,b)=>a-b);
+      const consecutive=datesSorted.length>1&&datesSorted.every((n,i)=>i===0||n===datesSorted[i-1]+1);
+      const dateLabel=consecutive?datesSorted[0]+'–'+datesSorted[datesSorted.length-1]:datesSorted.join('・');
+      const dateBox=makeCalEl('div','cal-event-date');dateBox.append(makeCalEl('small','',(month+1)+' 月'),makeCalEl('b','',dateLabel));
+      const body=makeCalEl('div','cal-event-body');
+      body.append(makeCalEl('strong','',card.dataset.name||card.querySelector('h3').textContent),makeCalEl('span','cal-event-meta',[readField(card,'上課時間'),readField(card,'適合年齡')].filter(Boolean).join(' ・ ')));
+      const status=makeCalEl('span','cal-event-status',card.querySelector('.badge')?.textContent||'課程資訊');status.dataset.status=card.dataset.status||'open';body.append(status);
+      a.append(dateBox,body,makeCalEl('span','','›'));box.append(a);
     });
   }
   function renderCalendar(){
-    $('#calMonth').textContent=year+' 年 '+(month+1)+' 月';
-    const grid=$('#calGrid');grid.replaceChildren();
-    ['日','一','二','三','四','五','六'].forEach(w=>{const el=document.createElement('span');el.className='cal-week';el.textContent=w;grid.append(el);});
+    const heading=document.getElementById('calMonth');
+    heading.replaceChildren(makeCalEl('span','cal-year',String(year)),makeCalEl('span','cal-month-num',(month+1)+' 月'),makeCalEl('span','cal-en',months[month]));
+    const grid=document.getElementById('calGrid');grid.replaceChildren();
+    ['日','一','二','三','四','五','六'].forEach((w,i)=>grid.append(makeCalEl('span','cal-week'+(i===0||i===6?' weekend':''),w)));
     for(let i=0;i<new Date(year,month,1).getDay();i++)grid.append(document.createElement('span'));
     const list=[];
     for(let d=1;d<=new Date(year,month+1,0).getDate();d++){
       const date=key(year,month,d),cards=events.get(date)||[];
-      const b=document.createElement('button');b.type='button';b.className='cal-day'+(cards.length?' has-course':'');b.textContent=d;b.setAttribute('aria-label',date+'，'+cards.length+' 堂課');b.setAttribute('aria-pressed','false');
-      if(cards.length){const dot=document.createElement('span');dot.className='cal-dot';dot.textContent=cards.length+' 堂';b.append(dot);cards.forEach(card=>list.push({date,card}));}
-      b.onclick=()=>{grid.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');details(date,cards.map(card=>({card})));};grid.append(b);
+      const b=makeCalEl('button','cal-day'+(cards.length?' has-course':''),String(d));b.type='button';
+      b.setAttribute('aria-label',date+'，'+cards.length+' 堂課');b.setAttribute('aria-pressed',String(selectedDate===date));
+      if(cards.length){b.style.setProperty('--cal-color',colorFor(cards[0]));b.append(makeCalEl('span','cal-dot','✦'.repeat(Math.min(cards.length,3))));cards.forEach(card=>list.push({date,card}));}
+      b.addEventListener('click',()=>{selectedDate=selectedDate===date?null:date;grid.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed',String(selectedDate===date));details(selectedDate,selectedDate?list.filter(item=>item.date===selectedDate):list);});
+      grid.append(b);
     }
-    details(null,list);
+    details(selectedDate,selectedDate?list.filter(item=>item.date===selectedDate):list);
   }
-  function changeMonth(delta){const next=new Date(year,month+delta,1);year=next.getFullYear();month=next.getMonth();renderCalendar();}
-  $('#calPrev').onclick=()=>changeMonth(-1);$('#calNext').onclick=()=>changeMonth(1);renderCalendar();
+  function changeMonth(delta){const next=new Date(year,month+delta,1);year=next.getFullYear();month=next.getMonth();selectedDate=null;renderCalendar();}
+  document.getElementById('calPrev').addEventListener('click',()=>changeMonth(-1));
+  document.getElementById('calNext').addEventListener('click',()=>changeMonth(1));
+  renderCalendar();
 
   // 報名內容整理
   const toast = $('#toast');
