@@ -486,6 +486,28 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 /* Preserve full rectangular emotion cards inside round bubbles. */
 .emotion-inner:has(img){inset:14%}
 .emotion-inner img{object-fit:contain;border-radius:5px;filter:drop-shadow(0 3px 5px rgba(112,77,49,.10))}
+/* Large reading bubbles — three main cards in a horizontal row */
+.emotion-garden .wrap{max-width:1440px;width:94%}
+.emotion-stage{max-width:1360px;width:100%;height:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;gap:clamp(8px,1.8vw,25px);padding:42px 0 40px;margin:12px auto 0}
+.emotion-stage .emotion-orb{position:relative;inset:auto;width:100%;aspect-ratio:1;z-index:1;border:3px solid var(--orb-color);box-shadow:0 10px 24px rgba(112,77,49,.10);--drift:5px}
+.emotion-stage .eo-one{margin-top:0}
+.emotion-stage .eo-two{margin-top:24px}
+.emotion-stage .eo-three{margin-top:-14px}
+.emotion-stage .emotion-inner,.emotion-stage .emotion-inner:has(img){inset:0}
+.emotion-stage .emotion-inner img{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:0;filter:none}
+.emotion-stage .emotion-orb:hover{animation-play-state:paused}
+.emotion-stage .ed-one{width:6%;left:0;top:0}
+.emotion-stage .ed-two{width:8%;right:1%;top:auto;bottom:0}
+.emotion-stage .ed-three{width:5%;left:31%;bottom:1%}
+.emotion-stage .ed-four{width:4%;right:31%;top:1%}
+.emotion-stage .es-one{left:2%;bottom:0}
+.emotion-stage .es-two{right:2%;top:0}
+.emotion-orb{cursor:zoom-in}
+.emotion-reader{max-width:min(92vw,820px);max-height:94dvh;padding:16px;border:1px solid #E6D8C7;border-radius:22px;background:#FFFDFA;color:#594739;box-shadow:0 16px 60px #59473933}
+.emotion-reader::backdrop{background:rgba(65,49,38,.65)}
+.emotion-reader img{display:block;max-width:100%;max-height:76dvh;object-fit:contain;margin:auto}
+.emotion-reader form{display:flex;justify-content:flex-end;margin:0 0 8px}
+@media(max-width:760px){.emotion-garden .wrap{width:92%}.emotion-stage{max-width:480px;grid-template-columns:1fr;gap:26px;padding:24px 12px}.emotion-stage .emotion-orb{margin:0 auto;width:100%}.emotion-stage .ed-two{top:40%;bottom:auto}.emotion-stage .ed-three{left:0;bottom:32%}.emotion-stage .ed-four{right:0;top:5%}}
 </style>
 </head>
 <body>
@@ -642,8 +664,8 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
       <div class="emotion-orb eo-one" data-orb="0"></div>
       <div class="emotion-orb eo-two" data-orb="1"></div>
       <div class="emotion-orb eo-three" data-orb="2"></div>
-      <div class="emotion-orb eo-four" data-orb="3"></div>
     </div>
+    <dialog id="emotionReader" class="emotion-reader" aria-label="放大閱讀情緒小卡"><form method="dialog"><button class="emotion-btn" aria-label="關閉放大圖片">關閉 ✕</button></form><img id="emotionReaderImage" alt="情緒小卡"></dialog>
     <div class="emotion-controls"><button type="button" id="emotionShuffle" class="emotion-btn">↻ 遇見另一種心情</button><button type="button" id="emotionPause" class="emotion-btn" aria-pressed="false">暫停浮動</button></div>
     <p class="emotion-footer">All feelings are welcome here.</p>
   </div>
@@ -1025,6 +1047,9 @@ const SITE_CONFIG = {
     const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
     const pause=document.getElementById('emotionPause');
     let paused=motion.matches, visible=false, cursor=0, changing=false;
+    const reader=document.getElementById('emotionReader');
+    const readerImage=document.getElementById('emotionReaderImage');
+    orbs.forEach((orb,i)=>{orb.tabIndex=0;orb.setAttribute('role','button');orb.setAttribute('aria-label','放大閱讀第 '+(i+1)+' 張情緒小卡');const open=()=>{const card=EMOTION_CARDS[shown[i]];if(!card?.src)return;readerImage.src=card.src;readerImage.alt=card.label;reader.showModal();};orb.addEventListener('click',open);orb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
     const shown=Array(orbs.length).fill(-1);
     const pick=arr=>arr[Math.floor(Math.random()*arr.length)];
     function draw(orb,card){
@@ -1056,12 +1081,12 @@ const SITE_CONFIG = {
         if(!animate||motion.matches||!old){apply();return;}
         changing=true;old.classList.add('is-changing');window.setTimeout(apply,440);
       }
-      function updatePause(){emotionStage.classList.toggle('is-paused',paused);pause.setAttribute('aria-pressed',String(paused));pause.textContent=paused?'繼續浮動':'暫停浮動';}
+      function updatePause(){emotionStage.classList.toggle('is-paused',paused);pause.setAttribute('aria-pressed',String(paused));pause.textContent=paused?'繼續浮動':'暫停浮動與換卡';}
       updatePause();
       pause.addEventListener('click',()=>{paused=!paused;updatePause();});
       document.getElementById('emotionShuffle').addEventListener('click',()=>{swap(cursor++%orbs.length,!paused);});
       if('IntersectionObserver' in window){new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;},{threshold:.15}).observe(emotionStage);}else{visible=true;}
-      window.setInterval(()=>{if(visible&&!paused&&!motion.matches&&!document.hidden)swap(cursor++%orbs.length);},4200);
+      window.setInterval(()=>{if(visible&&!paused&&!motion.matches&&!document.hidden&&!reader.open&&!emotionStage.matches(':hover')&&!emotionStage.matches(':focus-within'))swap(cursor++%orbs.length);},12000);
     }
   }
 
