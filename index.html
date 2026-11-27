@@ -454,6 +454,35 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 @keyframes momentBreathe{0%,15%,100%{transform:scale(1)}48%,65%{transform:scale(1.055)}}
 .moment-card:hover img,.moment-track:focus-within img{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.moment-image img.moment-ready{animation:none;transform:none}}
+/* Emotion garden — illustrated floating bubbles */
+.emotion-garden{background:#F8F2E7;overflow:hidden;color:#594739}
+.emotion-lead{font-size:19px;color:#90765E;margin:12px 0 5px}
+.emotion-stage{position:relative;isolation:isolate;max-width:860px;height:clamp(340px,55vw,510px);margin:16px auto 0}
+.emotion-orb{--orb-color:#EBC1A8;--drift:9px;position:absolute;display:grid;place-items:center;aspect-ratio:1;border-radius:50%;background:var(--orb-color);border:1px solid rgba(120,94,71,.10);box-shadow:0 12px 24px rgba(112,77,49,.07),inset 0 0 0 5px rgba(255,253,250,.22);animation:emotionDrift 8s ease-in-out infinite;transition:background-color .7s;overflow:hidden}
+.eo-one{width:32%;left:12%;top:3%;animation-delay:-1.1s}
+.eo-two{width:30%;right:11%;top:7%;animation-delay:-3.4s;animation-duration:9.5s;--drift:12px}
+.eo-three{width:25%;left:28%;bottom:4%;animation-delay:-5.2s;animation-duration:10s;--drift:7px}
+.eo-four{width:21%;right:16%;bottom:3%;animation-delay:-2.7s;animation-duration:8.8s}
+.emotion-inner{position:absolute;inset:12%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;transition:opacity .42s ease,transform .42s ease}
+.emotion-inner.is-changing{opacity:0;transform:scale(.96)}
+.emotion-inner svg{width:56%;height:56%;max-height:130px;overflow:visible}
+.emotion-inner span{font-size:clamp(13px,2vw,21px);font-weight:700;color:#594739;letter-spacing:.1em}
+.emotion-inner img{width:100%;height:100%;object-fit:contain;display:block}
+.emotion-deco{position:absolute;border-radius:50%;opacity:.55;pointer-events:none}
+.ed-one{width:8%;aspect-ratio:1;left:3%;top:16%;background:#BFDCE5}
+.ed-two{width:10%;aspect-ratio:1;right:2%;top:41%;background:#E0D1EC}
+.ed-three{width:6%;aspect-ratio:1;left:13%;bottom:10%;background:#E7CF91}
+.ed-four{width:5%;aspect-ratio:1;right:36%;top:1%;background:#EBC1A8}
+.emotion-spark{position:absolute;color:#B99A76;font-size:26px;pointer-events:none}
+.es-one{left:5%;bottom:28%}.es-two{right:7%;top:8%}
+.emotion-controls{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:6px}
+.emotion-btn{font:inherit;font-size:14px;font-weight:700;color:#806B59;background:#FFFDFA;border:1px solid #E6D8C7;border-radius:99px;padding:10px 18px;cursor:pointer}
+.emotion-btn:hover{background:#F0E4D5}
+.emotion-footer{text-align:center;color:#A38A70;font-size:12px;letter-spacing:.1em;margin-top:20px}
+@keyframes emotionDrift{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(calc(-1 * var(--drift))) rotate(2deg)}}
+.emotion-stage.is-paused .emotion-orb{animation-play-state:paused}
+@media(max-width:600px){.emotion-stage{height:clamp(285px,81vw,420px)}.eo-one{width:43%;left:3%;top:4%}.eo-two{width:39%;right:3%;top:9%}.eo-three{width:34%;left:13%;bottom:4%}.eo-four{width:30%;right:8%;bottom:5%}.emotion-inner{inset:9%}.ed-one{left:0;top:1%}.ed-two{right:0;top:49%}.ed-three{left:1%;bottom:7%}.emotion-spark{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.emotion-orb{animation:none}.emotion-inner{transition:none}}
 </style>
 </head>
 <body>
@@ -596,6 +625,27 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 </section>
 
 <!-- ======================= 情緒藝術 ======================= -->
+<section id="emotion-cards" class="emotion-garden">
+  <div class="wrap">
+    <div class="center">
+      <span class="cal-kicker">A LITTLE GARDEN OF FEELINGS</span>
+      <h2>情緒小宇宙</h2>
+      <p class="emotion-lead">每一種情緒，都值得被好好看見。</p>
+      <p class="lead">今天的你，是什麼心情呢？</p>
+    </div>
+    <div class="emotion-stage" id="emotionStage" aria-label="情緒小卡">
+      <span class="emotion-deco ed-one" aria-hidden="true"></span><span class="emotion-deco ed-two" aria-hidden="true"></span><span class="emotion-deco ed-three" aria-hidden="true"></span><span class="emotion-deco ed-four" aria-hidden="true"></span>
+      <span class="emotion-spark es-one" aria-hidden="true">✧</span><span class="emotion-spark es-two" aria-hidden="true">✦</span>
+      <div class="emotion-orb eo-one" data-orb="0"></div>
+      <div class="emotion-orb eo-two" data-orb="1"></div>
+      <div class="emotion-orb eo-three" data-orb="2"></div>
+      <div class="emotion-orb eo-four" data-orb="3"></div>
+    </div>
+    <div class="emotion-controls"><button type="button" id="emotionShuffle" class="emotion-btn">↻ 遇見另一種心情</button><button type="button" id="emotionPause" class="emotion-btn" aria-pressed="false">暫停浮動</button></div>
+    <p class="emotion-footer">All feelings are welcome here.</p>
+  </div>
+</section>
+
 <section id="art" class="art">
   <div class="wrap two">
     <div class="art-photos">
@@ -942,6 +992,61 @@ const SITE_CONFIG = {
   if (youtubePlayer && YOUTUBE_VIDEOS.length) {
     const videoId = YOUTUBE_VIDEOS[Math.floor(Math.random() * YOUTUBE_VIDEOS.length)];
     youtubePlayer.src = 'https://www.youtube-nocookie.com/embed/' + videoId;
+  }
+
+  // 情緒小卡：正式圖片上傳後，在此陣列填入 src、label、color。
+  // 未提供圖片時，先以網站既有手繪情緒圖示顯示。
+  const EMOTION_CARDS = [
+    {label:'開心', color:'#E7CF91', icon:'f-happy'},
+    {label:'難過', color:'#BFDCE5', icon:'f-sad'},
+    {label:'生氣', color:'#EBC1A8', icon:'f-angry'},
+    {label:'平靜', color:'#C7DBC1', icon:'f-calm'},
+    {label:'驚喜', color:'#E0D1EC', icon:'f-wow'}
+  ];
+  const emotionStage=document.getElementById('emotionStage');
+  if(emotionStage){
+    const orbs=Array.from(emotionStage.querySelectorAll('.emotion-orb'));
+    const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
+    const pause=document.getElementById('emotionPause');
+    let paused=motion.matches, visible=false, cursor=0, changing=false;
+    const shown=Array(orbs.length).fill(-1);
+    const pick=arr=>arr[Math.floor(Math.random()*arr.length)];
+    function draw(orb,card){
+      orb.style.setProperty('--orb-color',card.color||'#EBC1A8');
+      const inner=document.createElement('div');inner.className='emotion-inner';
+      const fallback=()=>{
+        inner.replaceChildren();
+        if(card.icon){
+          const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),use=document.createElementNS(ns,'use');
+          svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');use.setAttribute('href','#'+card.icon);use.setAttribute('width','100');use.setAttribute('height','100');svg.append(use);inner.append(svg);
+        }
+        const label=document.createElement('span');label.textContent=card.label||'情緒小卡';inner.append(label);
+      };
+      if(card.src){const img=document.createElement('img');img.alt=card.label||'情緒小卡';img.decoding='async';img.addEventListener('error',fallback,{once:true});img.src=card.src;inner.append(img);}else{fallback();}
+      orb.replaceChildren(inner);
+    }
+    function choose(slot){
+      const choices=EMOTION_CARDS.map((_,i)=>i).filter(i=>!shown.includes(i));
+      return choices.length?pick(choices):shown[slot]>=0?shown[slot]:slot%EMOTION_CARDS.length;
+    }
+    function setCard(slot){const id=choose(slot);shown[slot]=id;draw(orbs[slot],EMOTION_CARDS[id]);}
+    if(EMOTION_CARDS.length){
+      orbs.forEach((_,i)=>setCard(i));
+      function swap(slot,animate=true){
+        if(changing||!EMOTION_CARDS.length)return;
+        const next=choose(slot);if(next===shown[slot])return;
+        const old=orbs[slot].firstElementChild;
+        const apply=()=>{shown[slot]=next;draw(orbs[slot],EMOTION_CARDS[next]);changing=false;};
+        if(!animate||motion.matches||!old){apply();return;}
+        changing=true;old.classList.add('is-changing');window.setTimeout(apply,440);
+      }
+      function updatePause(){emotionStage.classList.toggle('is-paused',paused);pause.setAttribute('aria-pressed',String(paused));pause.textContent=paused?'繼續浮動':'暫停浮動';}
+      updatePause();
+      pause.addEventListener('click',()=>{paused=!paused;updatePause();});
+      document.getElementById('emotionShuffle').addEventListener('click',()=>{swap(cursor++%orbs.length,!paused);});
+      if('IntersectionObserver' in window){new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;},{threshold:.15}).observe(emotionStage);}else{visible=true;}
+      window.setInterval(()=>{if(visible&&!paused&&!motion.matches&&!document.hidden)swap(cursor++%orbs.length);},4200);
+    }
   }
 
   // 年份
