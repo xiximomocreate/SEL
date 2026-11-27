@@ -508,6 +508,36 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 .emotion-reader img{display:block;max-width:100%;max-height:76dvh;object-fit:contain;margin:auto}
 .emotion-reader form{display:flex;justify-content:flex-end;margin:0 0 8px}
 @media(max-width:760px){.emotion-garden .wrap{width:92%}.emotion-stage{max-width:480px;grid-template-columns:1fr;gap:26px;padding:24px 12px}.emotion-stage .emotion-orb{margin:0 auto;width:100%}.emotion-stage .ed-two{top:40%;bottom:auto}.emotion-stage .ed-three{left:0;bottom:32%}.emotion-stage .ed-four{right:0;top:5%}}
+/* Storybook teacher profile — two open pages */
+.teacher-story{background:#F8F2E7;color:#594739}
+.teacher-story .teacher-intro{margin-bottom:32px}
+.teacher-story .teacher-intro h2{margin-top:8px}
+.teacher-book{position:relative;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);background:#FFFDFA;border:1px solid #E6D8C7;border-radius:26px;box-shadow:0 12px 30px rgba(112,77,49,.08),0 5px 0 #EFE5D6,0 9px 0 -1px #E6D8C7;overflow:hidden}
+.teacher-page{position:relative;min-width:0;padding:clamp(24px,4vw,48px);padding-bottom:55px}
+.teacher-page-left{display:flex;flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(90deg,#FFFDFA 90%,#F4EBDC 100%);border-right:1px solid #E6D8C7}
+.teacher-story .teacher-page-left .photo{width:100%;max-width:370px;aspect-ratio:4/5;border-radius:48% 48% 24px 24px;border:7px solid #fff;box-shadow:0 9px 25px rgba(112,77,49,.12);margin:0}
+.teacher-story .photo>img{object-fit:cover;object-position:center 35%}
+.teacher-tape{position:absolute;top:clamp(20px,6%,48px);left:19%;width:76px;height:22px;background:#EBC1A8;opacity:.82;transform:rotate(-12deg);z-index:3;border-radius:2px;pointer-events:none}
+.teacher-photo-caption{font-size:15px;letter-spacing:.08em;color:#90765E;margin-top:18px}
+.teacher-doodle{position:absolute;width:70px;right:8%;bottom:38px;transform:rotate(9deg)}
+.teacher-page-right{background:linear-gradient(90deg,#F8F1E6 0%,#FFFDFA 9%)}
+.teacher-page-right h3{font-size:clamp(24px,3vw,34px);margin:9px 0 4px}
+.teacher-theme{color:#A38A70;letter-spacing:.15em;font-weight:700;font-size:13px}
+.teacher-lead{color:#90765E;line-height:1.8;margin:9px 0 20px}
+.teacher-chapter{--chapter:#C7DBC1;--chapter-ink:#526F4D;margin-top:14px;background:#F8F4EC;border-radius:12px;overflow:hidden}
+.teacher-chapter[data-theme="peach"]{--chapter:#EBC1A8;--chapter-ink:#875D48}
+.teacher-chapter[data-theme="sky"]{--chapter:#BFDCE5;--chapter-ink:#486D7B}
+.teacher-chapter h4{background:var(--chapter);color:var(--chapter-ink);font-size:15px;padding:9px 15px;margin:0}
+.teacher-chapter ul{list-style:none;margin:0;padding:11px 15px;display:grid;gap:7px}
+.teacher-chapter li{position:relative;padding-left:15px;font-size:15px;line-height:1.65;color:#594739;overflow-wrap:anywhere}
+.teacher-chapter li::before{content:"";position:absolute;left:0;top:.65em;width:6px;height:6px;border-radius:50%;background:var(--chapter-ink);opacity:.65}
+.teacher-page-num{position:absolute;bottom:16px;color:#A38A70;font-size:11px;letter-spacing:.1em}
+.teacher-page-left .teacher-page-num{left:24px}
+.teacher-page-right .teacher-page-num{right:24px}
+.teacher-belief{position:relative;margin:30px 0 0;padding:24px clamp(22px,5vw,60px);background:#F0E5D4;border:1px dashed #D9C9B5;border-radius:18px;text-align:center}
+.teacher-quote-mark{display:block;font-family:Georgia,serif;font-size:48px;line-height:.8;color:#B79B7B}
+.teacher-belief p{max-width:760px;margin:10px auto 0;color:#705E50;font-weight:700;font-size:clamp(16px,2vw,19px);line-height:1.9}
+@media(max-width:760px){.teacher-book{grid-template-columns:1fr}.teacher-page-left{border-right:0;border-bottom:1px solid #E6D8C7;background:#FFFDFA}.teacher-page-right{background:#FFFDFA}.teacher-page{padding:24px 20px 45px}.teacher-story .teacher-page-left .photo{max-width:300px}.teacher-tape{left:15%;top:20px}.teacher-doodle{width:55px;right:10%;bottom:30px}.teacher-chapter li{font-size:14px}}
 </style>
 </head>
 <body>
@@ -922,9 +952,17 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 </section>
 
 <!-- ======================= 老師 ======================= -->
-<section id="teacher" class="teacher">
-  <div class="wrap two">
-    <div class="photo">
+<section id="teacher" class="teacher teacher-story">
+  <div class="wrap">
+    <div class="center teacher-intro">
+      <span class="cal-kicker">MEET OUR TEACHER</span>
+      <h2>陪孩子一起長大的嘻嘻老師</h2>
+      <p class="lead">每個孩子，都有屬於自己的成長故事。</p>
+    </div>
+    <div class="teacher-book">
+      <div class="teacher-page teacher-page-left">
+        <span class="teacher-tape" aria-hidden="true"></span>
+        <div class="photo">
       <img src="images/jessie.jpg" alt="嘻嘻老師" onerror="this.remove()">
       <svg class="ill" viewBox="0 0 320 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <rect width="320" height="400" fill="#FFF0C2"/>
@@ -935,24 +973,22 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
         <use href="#i-crayon" x="40" y="250" width="70" height="70" class="float d1"/>
       </svg>
     </div>
-    <div>
-      <span class="eyebrow">關於老師</span>
-      <h2>我是嘻嘻老師</h2>
-      <p class="lead">陪孩子走一段充滿愛、創意與成長的旅程。</p>
-      <ul class="creds">
-        <li>教育科技研究所 碩士</li>
-        <li>英國 PARS PPP2 兒童遊戲工作者</li>
-        <li>Koala U. 情緒與人際（SEL）課程指定講師</li>
-        <li>TAYL 兒童藝術認證講師</li>
-        <li>兒童全腦開發認證講師</li>
-        <li>正念手作「生命之眼」四階導師</li>
-        <li>文化大學推廣部教師</li>
-        <li>高中美術與廣告設計教師</li>
-        <li>華山繪本森林 合作講師</li>
-        <li>幼兒園 合作講師</li>
-      </ul>
-      <p class="quote">我希望孩子帶走的，不只是一堂課，而是敢探索的勇氣、創造點子的能力，以及理解自己內心的力量。</p>
+        <p class="teacher-photo-caption">Jessie・嘻嘻老師</p>
+        <svg class="teacher-doodle" viewBox="0 0 100 90" aria-hidden="true"><path d="M16 64Q-1 49 16 34Q12 15 34 19Q48 0 63 20Q88 15 86 39Q104 61 82 72H26Q13 72 16 64Z" fill="#E7CF91"/><circle cx="35" cy="45" r="3" fill="#806449"/><circle cx="62" cy="45" r="3" fill="#806449"/><path d="M43 53Q49 60 55 53" stroke="#806449" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="27" cy="53" rx="6" ry="3" fill="#DA9B82"/><ellipse cx="70" cy="53" rx="6" ry="3" fill="#DA9B82"/></svg>
+        <span class="teacher-page-num">01</span>
+      </div>
+      <div class="teacher-page teacher-page-right">
+        <span class="cal-kicker">CHAPTER 01 · MY STORY</span>
+        <h3>我是嘻嘻老師</h3>
+        <p class="teacher-theme">教育 × 情緒 × 藝術</p>
+        <p class="teacher-lead">陪孩子走一段充滿愛、創意與成長的旅程。</p>
+        <div class="teacher-chapter" data-theme="sage"><h4>教育背景與專業訓練</h4><ul><li>教育科技研究所 碩士</li><li>英國 PARS PPP2 兒童遊戲工作者</li><li>兒童全腦開發認證講師</li></ul></div>
+        <div class="teacher-chapter" data-theme="peach"><h4>情緒教育與兒童藝術</h4><ul><li>Koala U. 情緒與人際（SEL）課程指定講師</li><li>TAYL 兒童藝術認證講師</li><li>正念手作「生命之眼」四階導師</li></ul></div>
+        <div class="teacher-chapter" data-theme="sky"><h4>教學經歷與合作講師</h4><ul><li>文化大學推廣部教師</li><li>高中美術與廣告設計教師</li><li>華山繪本森林 合作講師</li><li>幼兒園 合作講師</li></ul></div>
+        <span class="teacher-page-num">02</span>
+      </div>
     </div>
+    <blockquote class="teacher-belief"><span class="teacher-quote-mark" aria-hidden="true">“</span><span class="cal-kicker">MY BELIEF</span><p>我希望孩子帶走的，不只是一堂課，而是敢探索的勇氣、創造點子的能力，以及理解自己內心的力量。</p></blockquote>
   </div>
 </section>
 
