@@ -483,6 +483,9 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 .emotion-stage.is-paused .emotion-orb{animation-play-state:paused}
 @media(max-width:600px){.emotion-stage{height:clamp(285px,81vw,420px)}.eo-one{width:43%;left:3%;top:4%}.eo-two{width:39%;right:3%;top:9%}.eo-three{width:34%;left:13%;bottom:4%}.eo-four{width:30%;right:8%;bottom:5%}.emotion-inner{inset:9%}.ed-one{left:0;top:1%}.ed-two{right:0;top:49%}.ed-three{left:1%;bottom:7%}.emotion-spark{font-size:18px}}
 @media(prefers-reduced-motion:reduce){.emotion-orb{animation:none}.emotion-inner{transition:none}}
+/* Preserve full rectangular emotion cards inside round bubbles. */
+.emotion-inner:has(img){inset:14%}
+.emotion-inner img{object-fit:contain;border-radius:5px;filter:drop-shadow(0 3px 5px rgba(112,77,49,.10))}
 </style>
 </head>
 <body>
@@ -995,13 +998,26 @@ const SITE_CONFIG = {
   }
 
   // 情緒小卡：正式圖片上傳後，在此陣列填入 src、label、color。
-  // 未提供圖片時，先以網站既有手繪情緒圖示顯示。
+  // 正式情緒小卡圖片：由 GitHub 上傳紀錄取得完整檔名。
   const EMOTION_CARDS = [
-    {label:'開心', color:'#E7CF91', icon:'f-happy'},
-    {label:'難過', color:'#BFDCE5', icon:'f-sad'},
-    {label:'生氣', color:'#EBC1A8', icon:'f-angry'},
-    {label:'平靜', color:'#C7DBC1', icon:'f-calm'},
-    {label:'驚喜', color:'#E0D1EC', icon:'f-wow'}
+    {src:"images/card_573446683_17884042095402683_5326388527592583230_n.jpg",label:'情緒小卡 01',color:'#EBC1A8'},
+    {src:"images/card_579705372_17884273296402683_2439643930076655894_n.jpg",label:'情緒小卡 02',color:'#C7DBC1'},
+    {src:"images/card_581539436_17884673619402683_1021334897210234059_n.jpg",label:'情緒小卡 03',color:'#BFDCE5'},
+    {src:"images/card_581760740_17884610733402683_139548044507807197_n.jpg",label:'情緒小卡 04',color:'#E0D1EC'},
+    {src:"images/card_582330164_17885028810402683_2568767517491806195_n.jpg",label:'情緒小卡 05',color:'#E7CF91'},
+    {src:"images/card_587429109_17885942829402683_2041850744982397914_n.jpg",label:'情緒小卡 06',color:'#EBC1A8'},
+    {src:"images/card_590580324_17887714206402683_5134618398627878060_n.jpg",label:'情緒小卡 07',color:'#C7DBC1'},
+    {src:"images/card_670386494_17906527983402683_5337627118353121934_n.jpg",label:'情緒小卡 08',color:'#BFDCE5'},
+    {src:"images/card_670475209_17906528004402683_4216867544108953795_n.jpg",label:'情緒小卡 09',color:'#E0D1EC'},
+    {src:"images/card_670512909_17906527911402683_8526354326201594813_n.jpg",label:'情緒小卡 10',color:'#E7CF91'},
+    {src:"images/card_670792557_17906527956402683_4179271270624066599_n.jpg",label:'情緒小卡 11',color:'#EBC1A8'},
+    {src:"images/card_671106176_17906527974402683_4104698445430499025_n.jpg",label:'情緒小卡 12',color:'#C7DBC1'},
+    {src:"images/card_671222293_17906527971402683_2960480967363865313_n.jpg",label:'情緒小卡 13',color:'#BFDCE5'},
+    {src:"images/card_671245359_17906527992402683_2873949717416993126_n.jpg",label:'情緒小卡 14',color:'#E0D1EC'},
+    {src:"images/card_671829881_17906527920402683_8883419300524475877_n.jpg",label:'情緒小卡 15',color:'#E7CF91'},
+    {src:"images/card_671832889_17906527938402683_4498932434478366423_n.jpg",label:'情緒小卡 16',color:'#EBC1A8'},
+    {src:"images/card_673129712_17906527947402683_7213867403708590719_n.jpg",label:'情緒小卡 17',color:'#C7DBC1'},
+    {src:"images/card_673774318_17906527929402683_3773116962342385719_n.jpg",label:'情緒小卡 18',color:'#BFDCE5'}
   ];
   const emotionStage=document.getElementById('emotionStage');
   if(emotionStage){
