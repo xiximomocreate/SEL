@@ -213,6 +213,125 @@ footer p{font-size:14.5px;opacity:.85}
   .teacher .photo{width:100%;max-width:320px;margin-inline:auto}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ============================================================
+   SEL 視覺第二層：繪本感、親切、保留原品牌色
+   ============================================================ */
+:root{
+  --cream:#FFFAF1;
+  --paper:#FFFEFB;
+  --ink:#49372F;
+  --ink-soft:#78675D;
+  --coral:#F28B6E;
+  --coral-d:#D96B4C;
+  --sun:#F7C84F;
+  --sage:#8FCBA6;
+  --sky:#8CC9EA;
+  --lav:#B9A6E3;
+  --radius:30px;
+  --shadow:0 12px 32px rgba(112,77,49,.10);
+}
+body{font-size:16px;line-height:1.85;background:var(--cream)}
+.wrap{width:min(1160px,100% - 44px)}
+section{padding:clamp(66px,8vw,100px) 0}
+h2{letter-spacing:.01em}
+p{letter-spacing:.005em}
+:focus-visible{outline:3px solid #D96B4C;outline-offset:4px;border-radius:8px}
+
+/* 導覽列更像品牌小招牌 */
+header.nav{background:rgba(255,250,241,.94);border-bottom:1px solid rgba(217,107,76,.18);box-shadow:0 5px 20px rgba(112,77,49,.045)}
+.nav .wrap{height:74px}
+.brand{gap:9px;font-size:21px;letter-spacing:.04em}
+.brand svg{width:42px;height:42px;background:#fff;border-radius:50%;padding:3px;box-shadow:0 3px 10px rgba(112,77,49,.10)}
+.nav ul{gap:3px}
+.nav ul a{font-size:14px;padding:9px 13px}
+.nav ul a:hover{background:#FFF0C2;color:var(--coral-d)}
+.nav .cta{padding-inline:18px}
+
+/* 首屏：更有繪本封面感 */
+.hero{padding:clamp(50px,7vw,86px) 0 104px;background:
+  radial-gradient(circle at 8% 18%,rgba(247,200,79,.25) 0 7%,transparent 7.2%),
+  radial-gradient(circle at 92% 24%,rgba(185,166,227,.20) 0 8%,transparent 8.2%),
+  linear-gradient(180deg,#FFF0C9 0%,#FFFAF1 88%)}
+.hero .wrap{gap:clamp(28px,5vw,64px)}
+.hero h1{font-size:clamp(40px,6.2vw,66px);line-height:1.22;letter-spacing:.025em;margin:10px 0 18px}
+.hero h1 span{background:linear-gradient(transparent 72%,rgba(247,200,79,.72) 72%);padding-bottom:3px}
+.hero .eyebrow{background:#fff;border:1px solid rgba(242,139,110,.16);box-shadow:0 3px 10px rgba(112,77,49,.05);letter-spacing:.08em}
+.hero .tag{font-size:clamp(17px,2vw,21px);line-height:1.6}
+.hero .lead{font-size:16px;line-height:2}
+.hero .btns{gap:14px}
+.hero-art{padding:12px 8px 18px}
+.hero-art .photo{border-radius:44px 44px 44px 14px;border:8px solid #fff;box-shadow:0 18px 38px rgba(112,77,49,.15)}
+.hero-art .blob{filter:saturate(.9)}
+
+/* 內容段落：色塊柔和、卡片有手作感 */
+.eyebrow{font-size:13px;letter-spacing:.08em;padding:5px 15px}
+.lead{line-height:1.95}
+.pillar{border:2px dashed rgba(182,154,120,.30);box-shadow:0 8px 22px rgba(112,77,49,.07);transition:transform .2s,box-shadow .2s}
+.pillar:nth-child(2){transform:translateY(10px)}
+.pillar:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.pillar:nth-child(2):hover{transform:translateY(5px)}
+.bubble{border:2px solid rgba(247,200,79,.32);box-shadow:0 8px 22px rgba(112,77,49,.07)}
+.sel{background:linear-gradient(135deg,#E8F5E9,#F3FAF1)}
+.art{background:linear-gradient(135deg,#F2EDFC,#F8F4FF)}
+.photo{border:7px solid #fff;box-shadow:0 12px 28px rgba(112,77,49,.12)}
+.art-photos .photo{border-radius:28px 28px 28px 10px}
+
+/* 課程卡片：資訊清楚但不制式 */
+.courses{background:#FFFAF1}
+.course-grid{gap:24px}
+.course{border:2px solid rgba(182,154,120,.20);border-radius:30px;box-shadow:0 10px 26px rgba(112,77,49,.08)}
+.course:hover{border-color:var(--sun);box-shadow:0 16px 34px rgba(112,77,49,.13)}
+.course-head{padding:24px 26px 20px}
+.course h3{font-size:21px;line-height:1.5}
+.course-body{padding:20px 26px 26px}
+.course dl{gap:8px 13px;line-height:1.65}
+.course dt{color:#C96C51}
+.course .desc{line-height:1.9}
+.course .actions .btn{border-radius:99px}
+.badge{letter-spacing:.04em}
+
+/* 報名區：像邀請卡，表單容易閱讀 */
+.signup{background:linear-gradient(135deg,#E8F5FC,#F0F8FC)}
+.form-card{border:2px solid rgba(140,201,234,.32);border-radius:30px;box-shadow:0 14px 34px rgba(76,132,158,.10)}
+form input,form select,form textarea{border:1.5px solid #E7DACB;border-radius:14px;background:#FFFEFB}
+form input:focus,form select:focus,form textarea:focus{border-color:var(--coral);box-shadow:0 0 0 4px rgba(242,139,110,.14)}
+.channel{border:1px solid rgba(182,154,120,.15);border-radius:20px;box-shadow:0 7px 18px rgba(112,77,49,.07)}
+.channel:hover{transform:translateY(-3px)}
+
+/* 老師與頁尾 */
+.teacher .photo{border-radius:180px 180px 28px 28px}
+.creds li{border-radius:14px;box-shadow:0 4px 12px rgba(112,77,49,.06)}
+.quote{line-height:1.85}
+.video{background:linear-gradient(135deg,#FFF1C9,#FFF8E7)}
+.video-box{border-radius:30px;border:8px solid #fff}
+footer{background:#49372F}
+footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
+
+/* 手機：保留呼吸感、按鈕好點選 */
+@media(max-width:860px){
+  .wrap{width:min(100% - 32px,600px)}
+  .nav .wrap{height:68px}
+  .nav ul{top:68px;box-shadow:0 12px 18px rgba(112,77,49,.08)}
+  .hero{padding:36px 0 82px}
+  .hero-art{max-width:390px}
+  .hero h1{font-size:clamp(38px,10vw,52px)}
+  .pillars{gap:14px}
+  .pillar:nth-child(2){transform:none}
+  .pillar:nth-child(2):hover{transform:translateY(-5px)}
+  .course-grid{grid-template-columns:1fr}
+  .teacher .photo{border-radius:160px 160px 24px 24px}
+}
+@media(max-width:480px){
+  body{font-size:15.5px}
+  .hero .btns .btn{width:100%;justify-content:center}
+  .course-body{padding:18px 20px 22px}
+  .course-head{padding:20px}
+  .course dl{grid-template-columns:88px 1fr;font-size:14px}
+  .form-card{padding:22px 16px}
+  .form-actions .btn{width:100%;justify-content:center}
+}
+
 </style>
 </head>
 <body>
