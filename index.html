@@ -1026,7 +1026,7 @@ const SITE_CONFIG = {
   const events=new Map();
   const calColors=['#EBC1A8','#E0D1EC','#C7DBC1','#BFDCE5','#E9CF91'];
   const calCourses=Array.from(document.querySelectorAll('.course[data-dates]'));
-  const colorFor=card=>calColors[calCourses.indexOf(card)%calColors.length];
+  const colorFor=card=>getComputedStyle(card).getPropertyValue('--story').trim() || calColors[calCourses.indexOf(card)%calColors.length];
   const readField=(card,label)=>{
     const dt=Array.from(card.querySelectorAll('dt')).find(el=>el.textContent.trim()===label);
     return dt&&dt.nextElementSibling?dt.nextElementSibling.textContent.trim():'';
