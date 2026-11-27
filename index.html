@@ -421,6 +421,33 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 .social-symbol{width:18px;height:18px;flex:none}
 .fb-symbol{font-family:Arial,sans-serif;font-size:22px;font-weight:900;line-height:18px}
 @media(max-width:480px){.yt-story{font-size:15px;letter-spacing:0}.footer-community .social a{padding:7px 14px}}
+/* Storybook Courses — 繪本故事卡 */
+#courses{background:#F8F2E7}
+#courses .story-subtitle{margin:12px auto 8px;color:#90765E;font-size:18px;letter-spacing:.04em}
+#courses .course-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;margin-top:34px}
+#courses .course{--story:#EBC1A8;--story-ink:#875D48;background:#FFFDFA;border:1px solid #E6D8C7;border-radius:28px;box-shadow:0 8px 24px rgba(112,77,49,.07);overflow:hidden}
+#courses .course[data-story="sage"]{--story:#C7DBC1;--story-ink:#526F4D}
+#courses .course[data-story="sky"]{--story:#BFDCE5;--story-ink:#486D7B}
+#courses .course[data-story="lav"]{--story:#E0D1EC;--story-ink:#756184}
+#courses .course:hover{border-color:var(--story-ink);transform:translateY(-3px)}
+#courses .course .course-head{background:var(--story);padding:20px 24px 22px;min-height:166px;position:relative;border-bottom:1px dashed rgba(89,71,57,.25)}
+#courses .story-top{display:flex;align-items:center;justify-content:space-between;height:32px;margin-bottom:12px}
+#courses .story-chapter{font-size:10px;letter-spacing:.18em;color:var(--story-ink);font-weight:700}
+#courses .story-art{position:absolute;right:18px;top:12px;width:82px;height:78px;transform:rotate(5deg);pointer-events:none}
+#courses .story-tagline{font-size:14px;color:var(--story-ink);margin:0 88px 8px 0;font-weight:700}
+#courses .course-head .badge{display:inline-block;background:#FFFDFA;color:var(--story-ink);box-shadow:none;font-size:12px;padding:4px 10px;margin:0 0 8px;border-radius:99px}
+#courses .course[data-status="full"] .badge{background:#F3D2C6;color:#8B4E3C}
+#courses .course[data-status="closed"] .badge{background:#E6E1D9;color:#6B6258}
+#courses .course h3{font-size:22px;line-height:1.45;color:#594739;margin:0;overflow-wrap:anywhere}
+#courses .course-body{padding:22px 24px 24px;gap:16px}
+#courses .course dl{margin:0;background:#F8F4EC;border-radius:16px;padding:16px;grid-template-columns:auto minmax(0,1fr);gap:9px 13px;font-size:15px}
+#courses .course dt{color:var(--story-ink);font-weight:700}
+#courses .course dd{color:#594739;overflow-wrap:anywhere}
+#courses .course .desc{order:-1;color:#705E50;line-height:1.9;padding:0 0 0 13px;border-left:3px solid var(--story);margin:0}
+#courses .course .actions .btn{box-shadow:none;border-radius:99px}
+#courses .course .actions .btn:not(.line){background:var(--story);color:#49372F}
+@media(max-width:720px){#courses .course-grid{grid-template-columns:1fr;gap:20px}#courses .course-body{padding:18px}#courses .course .course-head{padding:18px 20px}#courses .course h3{font-size:20px}#courses .course dl{font-size:14px;padding:12px}}
+@media(prefers-reduced-motion:reduce){#courses .course{transition:none}#courses .course:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -623,8 +650,9 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
 <section id="courses" class="courses">
   <div class="wrap">
     <div class="center">
-      <span class="eyebrow">課程資訊</span>
+      <span class="cal-kicker">LITTLE STORIES, BIG FEELINGS</span>
       <h2>近期開課</h2>
+      <p class="story-subtitle">每一堂課，都是孩子成長故事裡的一小頁。</p>
       <p class="lead">點選「我要報名」會自動帶入課程，再填寫簡單資料即可。名額有限，建議儘早報名。</p>
     </div>
 
@@ -636,8 +664,10 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
            data-form  ：（選填）這門課專屬的 Google 表單網址，沒填就用 SITE_CONFIG 的
            ================================================== -->
 
-      <article class="course" data-status="open" data-theme="sage" data-name="2026 情緒藝術創作" data-dates="2026-12-05,2026-12-12,2026-12-19">
+      <article class="course" data-status="open" data-theme="sage" data-story="peach" data-name="2026 情緒藝術創作" data-dates="2026-12-05,2026-12-12,2026-12-19">
         <div class="course-head">
+          <div class="story-top"><span class="story-chapter">CHAPTER 01</span><svg class="story-art" viewBox="0 0 100 90" aria-hidden="true"><path d="M20 70Q8 41 30 24Q53 7 76 24Q93 40 80 58Q73 68 63 63L55 54Q49 49 44 59L39 69Q32 80 20 70Z" fill="#E9CFA8" stroke="#97775E" stroke-width="2"/><circle cx="29" cy="40" r="5" fill="#D99A87"/><circle cx="44" cy="30" r="5" fill="#9DBB99"/><circle cx="61" cy="35" r="5" fill="#A7C9D6"/><path d="M66 67L88 14" stroke="#927257" stroke-width="5" stroke-linecap="round"/><path d="M88 14Q96 7 94 1Q85 4 83 12Z" fill="#D99A87"/></svg></div>
+          <p class="story-tagline">讓想像力開花</p>
           <span class="badge">報名中</span>
           <h3>2026 情緒藝術創作</h3>
         </div>
@@ -655,8 +685,10 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
         </div>
       </article>
       
-      <article class="course" data-status="open" data-theme="sun" data-name="2027 小寶情緒冬令營" data-dates="2027-02-01,2027-02-02,2027-02-03">
+      <article class="course" data-status="open" data-theme="sun" data-story="sage" data-name="2027 小寶情緒冬令營" data-dates="2027-02-01,2027-02-02,2027-02-03">
         <div class="course-head">
+          <div class="story-top"><span class="story-chapter">CHAPTER 02</span><svg class="story-art" viewBox="0 0 100 90" aria-hidden="true"><path d="M12 30Q32 20 50 36Q68 20 88 30L88 75Q67 66 50 79Q33 66 12 75Z" fill="#FFFAEE" stroke="#997D61" stroke-width="2"/><path d="M50 36V79" stroke="#997D61" stroke-width="2"/><path d="M24 43Q34 39 42 45M24 53L41 55M58 45Q68 39 79 43M58 55L78 53" fill="none" stroke="#C7A581" stroke-width="2" stroke-linecap="round"/><path d="M49 23Q34 15 42 9Q48 5 51 12Q58 5 63 10Q69 17 49 23Z" fill="#D99A87"/></svg></div>
+          <p class="story-tagline">把心情說成故事</p>
           <span class="badge">報名中</span>
           <h3>2027 小寶情緒冬令營</h3>
         </div>
@@ -674,8 +706,10 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
         </div>
       </article>
 
-      <article class="course" data-status="open" data-theme="sage" data-name="2027 心定力冬令營" data-dates="2027-01-25,2027-01-26,2027-01-27,2027-01-28,2027-01-29">
+      <article class="course" data-status="open" data-theme="sage" data-story="sky" data-name="2027 心定力冬令營" data-dates="2027-01-25,2027-01-26,2027-01-27,2027-01-28,2027-01-29">
         <div class="course-head">
+          <div class="story-top"><span class="story-chapter">CHAPTER 03</span><svg class="story-art" viewBox="0 0 100 90" aria-hidden="true"><path d="M50 79V37M50 55Q23 55 20 31Q45 30 50 55M50 47Q76 46 80 22Q56 22 50 47" fill="#AAC5A0" stroke="#78946F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 80Q50 72 79 80" fill="none" stroke="#B79B7B" stroke-width="3" stroke-linecap="round"/><circle cx="28" cy="18" r="9" fill="#E6C77E"/><path d="M86 7v12M80 13h12" stroke="#C4A376" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <p class="story-tagline">練習安定的小勇氣</p>
           <span class="badge">報名中</span>
           <h3>2027 心定力冬令營</h3>
         </div>
@@ -693,8 +727,10 @@ footer .brand svg{background:rgba(255,255,255,.12);box-shadow:none}
         </div>
       </article>
       
-      <article class="course" data-status="open" data-theme="sun" data-name="寶寶 SEL情緒七感遊戲(體驗班)" data-dates="2027-01-11">
+      <article class="course" data-status="open" data-theme="sun" data-story="lav" data-name="寶寶 SEL情緒七感遊戲(體驗班)" data-dates="2027-01-11">
         <div class="course-head">
+          <div class="story-top"><span class="story-chapter">CHAPTER 04</span><svg class="story-art" viewBox="0 0 100 90" aria-hidden="true"><path d="M14 65Q-1 47 16 36Q14 18 34 20Q47 5 61 20Q83 14 85 35Q103 52 83 68Z" fill="#FFF8E9" stroke="#A798B3" stroke-width="2"/><circle cx="35" cy="45" r="2.5" fill="#806B79"/><circle cx="63" cy="45" r="2.5" fill="#806B79"/><path d="M44 51Q49 57 55 51" fill="none" stroke="#806B79" stroke-width="2" stroke-linecap="round"/><ellipse cx="28" cy="53" rx="6" ry="3" fill="#E6B3A0"/><ellipse cx="70" cy="53" rx="6" ry="3" fill="#E6B3A0"/><path d="M16 76l-3 7M43 76l-3 7M70 76l-3 7" stroke="#A7C9D6" stroke-width="3" stroke-linecap="round"/></svg></div>
+          <p class="story-tagline">用小手探索世界</p>
           <span class="badge">報名中</span>
           <h3>寶寶 SEL情緒七感遊戲(體驗班)</h3>
         </div>
