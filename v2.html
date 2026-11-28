@@ -568,6 +568,18 @@ header.nav{background:rgba(255,253,250,.96);border-bottom:1px solid #E6D8C7;box-
 .v2-sticky{display:none}
 @media(max-width:860px){.v2-empathy-grid,.v2-journey-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v2-journey-grid::before{display:none}.hero h1 br{display:none}.hero .photo{aspect-ratio:4/3}.hero .wrap{gap:25px}.v2-sticky{position:fixed;bottom:0;left:0;right:0;z-index:60;display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#FFFDFA;border-top:1px solid #E6D8C7}.v2-sticky a{flex:1;padding:12px 8px;border-radius:99px;text-align:center;text-decoration:none;font-size:14px;font-weight:700}.v2-sticky-line{background:#E1ECDD;color:#345F43}.v2-sticky-course{background:#A95540;color:#fff}body{padding-bottom:75px}.nav .brand{font-size:clamp(13px,3.6vw,20px);letter-spacing:0}.nav .wrap{gap:6px}.emotion-stage{max-width:480px;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:24px 5%;gap:14px}.emotion-stage .emotion-orb{flex:0 0 90%;scroll-snap-align:center}.emotion-stage .emotion-deco,.emotion-stage .emotion-spark{display:none}}
 @media(max-width:420px){.v2-empathy-grid{gap:10px}.v2-feeling{padding:16px 10px}.v2-feeling h3{font-size:15px}.v2-step h3{font-size:17px}}
+/* V2: real classroom photography, framed like a storybook */
+.hero-art .photo{aspect-ratio:3/2;transform:rotate(1.2deg)}
+.hero-art .photo>img{object-position:center;object-fit:cover}
+.v2-real-caption{font-size:13px;color:#705E50;text-align:center;margin:16px 0 0;letter-spacing:.04em}
+#sel .photo{aspect-ratio:4/5;max-width:440px;width:100%;margin-inline:auto}
+#sel .photo>img{object-position:center 44%}
+#art .art-photos .photo:first-child{aspect-ratio:3/2}
+#art .art-photos .photo:first-child>img{object-fit:contain;background:#3E3733}
+#art .art-photos .photo:nth-child(2)>img{object-position:62% center}
+#art .art-photos .photo:nth-child(3)>img{object-position:55% center}
+.moment-card figcaption{font-size:14px;line-height:1.6}
+@media(max-width:860px){.hero-art .photo{aspect-ratio:3/2}.hero-art{order:0}.hero .wrap{gap:18px}#sel .photo{max-width:330px}}
 </style>
 </head>
 <body>
@@ -617,7 +629,7 @@ header.nav{background:rgba(255,253,250,.96);border-bottom:1px solid #E6D8C7;box-
       <div class="blob" style="width:220px;height:220px;background:var(--sage-l);right:-30px;top:-30px"></div>
       <div class="blob" style="width:120px;height:120px;background:var(--lav-l);left:-20px;bottom:-20px"></div>
       <div class="photo tilt-r" style="z-index:1">
-        <img src="images/hero.jpg" alt="嘻嘻獴獴課程現場" fetchpriority="high" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.referrerPolicy='no-referrer';this.src='https://drive.google.com/thumbnail?id=1R8BZmFoqIxdWOvm8vt4i2-991H7cA1LV&amp;sz=w1200'}else{this.remove()}">
+        <img src="images/class_499418883_4153788364854163_3223879162097148632_n.jpg" alt="老師在桌邊陪伴孩子使用畫筆創作" fetchpriority="high" decoding="async" onerror="this.remove()">
         <svg class="ill" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <rect width="400" height="300" fill="#FFF0C2"/>
           <circle cx="330" cy="60" r="34" fill="#F7C84F" opacity=".7"/>
@@ -629,6 +641,7 @@ header.nav{background:rgba(255,253,250,.96);border-bottom:1px solid #E6D8C7;box-
           <use href="#f-wow" x="230" y="195" width="80" height="80" class="float d1"/>
         </svg>
       </div>
+      <p class="v2-real-caption">真實課堂紀錄・陪伴，是成長的開始。</p>
     </div>
   </div>
   <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30q180 40 360 10t360-10 360 20 360-10v20H0z" fill="#FFF8EC"/></svg>
@@ -690,7 +703,7 @@ header.nav{background:rgba(255,253,250,.96);border-bottom:1px solid #E6D8C7;box-
       </div>
     </div>
     <div class="photo tilt-l">
-      <img loading="lazy" decoding="async" src="images/sel.jpg" alt="SEL 情緒學習課程" onerror="this.remove()">
+      <img loading="lazy" decoding="async" src="images/class_490699917_989727406708170_5086037215938510343_n.jpg" alt="孩子戴著兔耳造型道具，面前擺著彩色作品" onerror="this.remove()">
       <svg class="ill" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <rect width="400" height="300" fill="#FFFFFF"/>
         <circle cx="200" cy="150" r="120" fill="#E1F3E7"/>
@@ -708,15 +721,15 @@ header.nav{background:rgba(255,253,250,.96);border-bottom:1px solid #E6D8C7;box-
   <div class="wrap two">
     <div class="art-photos">
       <div class="photo tilt-r">
-        <img loading="lazy" decoding="async" src="images/art1.jpg" alt="情緒藝術創作" onerror="this.remove()">
+        <img loading="lazy" decoding="async" src="images/class_499156439_4153804314852568_7949412418108819063_n.jpg" alt="孩子在黑板上用粉筆自由創作" onerror="this.remove()">
         <svg class="ill" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="225" fill="#fff"/><path d="M0 170q100-50 200-10t200-30v95H0z" fill="#EEE8FA"/><use href="#i-crayon" x="60" y="40" width="120" height="120" class="float"/><use href="#i-book" x="230" y="50" width="110" height="110" class="float d2"/></svg>
       </div>
       <div class="photo">
-        <img loading="lazy" decoding="async" src="images/art2.jpg" alt="孩子的創作作品" onerror="this.remove()">
+        <img loading="lazy" decoding="async" src="images/class_501259739_4165101650389501_2181663138142972168_n.jpg" alt="孩子用雙手與雙腳探索紫色顏料" onerror="this.remove()">
         <svg class="ill" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="200" height="200" fill="#FFF0C2"/><use href="#f-wow" x="45" y="45" width="110" height="110" class="float"/></svg>
       </div>
       <div class="photo">
-        <img loading="lazy" decoding="async" src="images/class.jpg" alt="課程相片" onerror="this.remove()">
+        <img loading="lazy" decoding="async" src="images/class_501755693_4164994313733568_1605489921609523646_n.jpg" alt="孩子專注操作手中的創作工具" onerror="this.remove()">
         <svg class="ill" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="200" height="200" fill="#E2F3FB"/><use href="#f-happy" x="45" y="45" width="110" height="110" class="float d1"/></svg>
       </div>
     </div>
@@ -1223,6 +1236,14 @@ const SITE_CONFIG = {
 
   // 課程花絮：Google Drive 公開照片連結；新增時在此填入 thumbnail URL 與原始連結。
   const MOMENT_PHOTOS = [
+    {src:"images/class_486063548_974584221555822_3331866198358635502_n.jpg",url:"images/class_486063548_974584221555822_3331866198358635502_n.jpg",caption:"笑著分享彩色線條作品與手作玩偶"},
+    {src:"images/class_490699917_989727406708170_5086037215938510343_n.jpg",url:"images/class_490699917_989727406708170_5086037215938510343_n.jpg",caption:"戴上兔耳，一起探索角色遊戲"},
+    {src:"images/class_499156439_4153804314852568_7949412418108819063_n.jpg",url:"images/class_499156439_4153804314852568_7949412418108819063_n.jpg",caption:"在黑板上留下自己的創作痕跡"},
+    {src:"images/class_499418883_4153788364854163_3223879162097148632_n.jpg",url:"images/class_499418883_4153788364854163_3223879162097148632_n.jpg",caption:"老師陪伴孩子一起動手創作"},
+    {src:"images/class_500710673_4164500487116284_8220072728686413684_n.jpg",url:"images/class_500710673_4164500487116284_8220072728686413684_n.jpg",caption:"舉起自己完成的彩色作品"},
+    {src:"images/class_501259739_4165101650389501_2181663138142972168_n.jpg",url:"images/class_501259739_4165101650389501_2181663138142972168_n.jpg",caption:"用雙手與雙腳探索色彩"},
+    {src:"images/class_501755693_4164994313733568_1605489921609523646_n.jpg",url:"images/class_501755693_4164994313733568_1605489921609523646_n.jpg",caption:"專注探索手中的創作工具"},
+    {src:"images/class_502519696_4169430159956650_2395052722373985412_n.jpg",url:"images/class_502519696_4169430159956650_2395052722373985412_n.jpg",caption:"笑著展示自己的大幅作品"},
     {src:'https://drive.google.com/thumbnail?id=1R8BZmFoqIxdWOvm8vt4i2-991H7cA1LV&sz=w1200',url:'https://drive.google.com/file/d/1R8BZmFoqIxdWOvm8vt4i2-991H7cA1LV/view',caption:'課程花絮 01'},
     {src:'https://drive.google.com/thumbnail?id=1HhNP0_k5bLA91i1Uj451ToOOvqh7GL2w&sz=w1200',url:'https://drive.google.com/file/d/1HhNP0_k5bLA91i1Uj451ToOOvqh7GL2w/view',caption:'課程花絮 02'},
     {src:'https://drive.google.com/thumbnail?id=1rgBePvdIfGUqzEbkq4e802krbKCSo8jP&sz=w1200',url:'https://drive.google.com/file/d/1rgBePvdIfGUqzEbkq4e802krbKCSo8jP/view',caption:'課程花絮 03'},
@@ -1237,7 +1258,7 @@ const SITE_CONFIG = {
   MOMENT_PHOTOS.forEach((item,index)=>{
     const card=document.createElement('figure');card.className='moment-card';
     const frame=document.createElement('div');frame.className='moment-image';frame.textContent='照片載入中';
-    const img=document.createElement('img');img.alt=item.caption;img.loading='lazy';img.referrerPolicy='no-referrer';img.onerror=()=>{img.remove();frame.textContent='';const link=document.createElement('a');link.href=item.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='在 Google Drive 查看照片';frame.append(link);};img.src=item.src;
+    const img=document.createElement('img');img.alt=item.caption;img.loading='lazy';img.referrerPolicy='no-referrer';img.onerror=()=>{img.remove();frame.textContent='';const link=document.createElement('a');link.href=item.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='查看原始照片';frame.append(link);};img.src=item.src;
     img.style.setProperty('--moment-delay', (index % 9 * 1.1) + 's');
     img.addEventListener('load',()=>img.classList.add('moment-ready'),{once:true});
     if(img.complete&&img.naturalWidth)img.classList.add('moment-ready');
