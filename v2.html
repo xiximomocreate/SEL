@@ -1274,7 +1274,13 @@ const SITE_CONFIG = {
     {src:'https://drive.google.com/thumbnail?id=1FQdfrgn74s8bqTco9du3SU62hi7VP8_R&sz=w1200',url:'https://drive.google.com/file/d/1FQdfrgn74s8bqTco9du3SU62hi7VP8_R/view',caption:'課程花絮 09'}
   ];
   const track = $('#momentTrack');
-  MOMENT_PHOTOS.forEach((item,index)=>{
+  // Fisher–Yates: shuffle a copy once per page load, keeping photo metadata together.
+  const shuffledMomentPhotos = MOMENT_PHOTOS.slice();
+  for (let i = shuffledMomentPhotos.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledMomentPhotos[i], shuffledMomentPhotos[j]] = [shuffledMomentPhotos[j], shuffledMomentPhotos[i]];
+  }
+  shuffledMomentPhotos.forEach((item,index)=>{
     const card=document.createElement('figure');card.className='moment-card';
     const frame=document.createElement('div');frame.className='moment-image';frame.textContent='照片載入中';
     const img=document.createElement('img');img.alt=item.caption;img.loading='lazy';img.referrerPolicy='no-referrer';img.onerror=()=>{img.remove();frame.textContent='';const link=document.createElement('a');link.href=item.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='查看原始照片';frame.append(link);};img.src=item.src;
